@@ -22,7 +22,7 @@ const packagesDir = join(kiloVscodeDir, "..")
 const opencodeDir = join(packagesDir, "opencode")
 
 const targetBinDir = join(kiloVscodeDir, "bin")
-const binName = process.platform === "win32" ? "kilo.exe" : "kilo"
+const binName = process.platform === "win32" ? "zhanlu.exe" : "zhanlu"
 const targetBinPath = join(targetBinDir, binName)
 
 function log(msg: string) {
@@ -53,7 +53,7 @@ async function findKiloBinaryInOpencodeDist(): Promise<string | null> {
     // fall through to generic search
   }
 
-  // Fallback: find any dist/**/bin/kilo or kilo.exe
+  // Fallback: find any dist/**/bin/zhanlu or zhanlu.exe
   const queue = [distDir]
   while (queue.length) {
     const dir = queue.pop()
@@ -72,7 +72,7 @@ async function findKiloBinaryInOpencodeDist(): Promise<string | null> {
         queue.push(p)
         continue
       }
-      if (e.isFile() && (e.name === "kilo" || e.name === "kilo.exe") && basename(dirname(p)) === "bin") {
+      if (e.isFile() && (e.name === "zhanlu" || e.name === "zhanlu.exe") && basename(dirname(p)) === "bin") {
         return p
       }
     }

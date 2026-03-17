@@ -173,7 +173,7 @@ for (const item of targets) {
       autoloadTsconfig: true,
       autoloadPackageJson: true,
       target: name.replace(pkg.name, "bun") as any,
-      outfile: `dist/${name}/bin/kilo`,
+      outfile: `dist/${name}/bin/zhanlu`,
       execArgv: [`--user-agent=kilo/${Script.version}`, "--use-system-ca", "--"],
       windows: {},
     },
@@ -200,7 +200,7 @@ for (const item of targets) {
     const interpreter = interpreters[key]
     if (interpreter) {
       try {
-        await $`patchelf --set-interpreter ${interpreter} dist/${name}/bin/kilo`
+        await $`patchelf --set-interpreter ${interpreter} dist/${name}/bin/zhanlu`
         console.log(`patched interpreter for ${name} -> ${interpreter}`)
       } catch {
         console.warn(`patchelf not available, skipping interpreter fix for ${name}`)

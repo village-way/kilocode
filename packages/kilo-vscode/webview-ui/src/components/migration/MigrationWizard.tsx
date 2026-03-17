@@ -28,12 +28,9 @@ import "./migration.css"
 
 const KiloLogo = (): JSX.Element => {
   const iconsBaseUri = (window as { ICONS_BASE_URI?: string }).ICONS_BASE_URI || ""
-  const isLight =
-    document.body.classList.contains("vscode-light") || document.body.classList.contains("vscode-high-contrast-light")
-  const icon = isLight ? "kilo-light.svg" : "kilo-dark.svg"
   return (
     <div class="migration-wizard__logo">
-      <img src={`${iconsBaseUri}/${icon}`} alt="Kilo Code" />
+      <img src={`${iconsBaseUri}/icon.svg`} alt="湛卢" />
     </div>
   )
 }
@@ -527,7 +524,7 @@ const MigrationWizard: Component<MigrationWizardProps> = (props) => {
           </div>
 
           <div class="migration-wizard__blog-link">
-            <a href="https://blog.kilo.ai/we-completely-rebuilt-the-kilo-vs-code-extension">
+            <a href="https://github.com/village-way/zhanlu-vs">
               {language.t("migration.whatsNew.blogLink")} <span>&rarr;</span>
             </a>
           </div>

@@ -787,7 +787,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL kopiert til utklippstavlen",
   "deviceAuth.toast.codeCopied": "Kode kopiert til utklippstavlen",
   "deviceAuth.status.initiating": "Starter pålogging...",
-  "deviceAuth.title": "Logg inn på Kilo Code",
+  "deviceAuth.title": "Logg inn på 湛卢",
   "deviceAuth.step1": "Trinn 1: Åpne denne URLen",
   "deviceAuth.action.copyUrl": "Kopier URL",
   "deviceAuth.action.openBrowser": "Åpne nettleser",
@@ -805,7 +805,7 @@ export const dict = {
 
   "profile.title": "Profil",
   "profile.notLoggedIn": "Ikke pålogget",
-  "profile.action.login": "Logg inn med Kilo Code",
+  "profile.action.login": "Logg inn med 湛卢",
   "profile.balance.title": "Saldo",
   "profile.balance.refresh": "Oppdater saldo",
   "profile.action.dashboard": "Kontrollpanel",
@@ -824,11 +824,11 @@ export const dict = {
   "settings.prompts.title": "Meldinger",
   "settings.experimental.title": "Eksperimentelt",
   "settings.language.title": "Språk",
-  "settings.aboutKiloCode.title": "Om Kilo Code",
+  "settings.aboutKiloCode.title": "Om 湛卢",
 
   "session.messages.empty": "Start en samtale ved å skrive en melding nedenfor.",
   "session.messages.welcome":
-    "Kilo Code er en AI-kodingsassistent. Be den om å bygge funksjoner, fikse feil eller forklare kodebasen din.",
+    "湛卢 er en AI-kodingsassistent. Be den om å bygge funksjoner, fikse feil eller forklare kodebasen din.",
   "session.messages.scrollToBottom": "Rull til bunnen",
   "session.status.writingResponse": "Skriver svar…",
   "session.status.retrying": "Prøver på nytt (forsøk {{ attempt }})… {{ message }}",
@@ -861,14 +861,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "Port:",
   "settings.aboutKiloCode.versionInfo": "Versjonsinformasjon",
   "settings.aboutKiloCode.version.label": "Versjon:",
-  "settings.aboutKiloCode.extensionName": "Kilo Code-utvidelse",
+  "settings.aboutKiloCode.extensionName": "湛卢-utvidelse",
   "settings.aboutKiloCode.community": "Fellesskap og støtte",
   "settings.aboutKiloCode.feedback.prefix": "Hvis du har spørsmål eller tilbakemeldinger, åpne gjerne en issue på",
   "settings.aboutKiloCode.feedback.or": "eller",
   "settings.aboutKiloCode.support.prefix": "For fakturerings- eller kontospørsmål, kontakt kundestøtte på",
   "settings.aboutKiloCode.resetSettings.title": "Tilbakestill innstillinger",
   "settings.aboutKiloCode.resetSettings.description":
-    "Tilbakestill alle Kilo Code-utvidelsesinnstillinger til standardverdier. Dette påvirker ikke CLI- eller backend-konfigurasjon.",
+    "Tilbakestill alle 湛卢-utvidelsesinnstillinger til standardverdier. Dette påvirker ikke CLI- eller backend-konfigurasjon.",
   "settings.aboutKiloCode.resetSettings.button": "Tilbakestill alle innstillinger",
 
   "settings.agentBehaviour.subtab.modes": "Moduser",
@@ -888,7 +888,7 @@ export const dict = {
   "settings.browser.headless.title": "Headless-modus",
   "settings.browser.headless.description": "Kjør i headless-modus (uten synlig nettleservindu).",
 
-  "settings.language.description": 'Velg språket for Kilo Code-grensesnittet. "Auto" bruker VS Codes visningsspråk.',
+  "settings.language.description": 'Velg språket for 湛卢-grensesnittet. "Auto" bruker VS Codes visningsspråk.',
   "settings.language.auto": "Auto (VS Code-språk)",
   "settings.language.current": "Nåværende:",
 
@@ -1031,10 +1031,10 @@ export const dict = {
   "settings.legacyMigration.link": "Migrer fra eldre versjon",
   "settings.aboutKiloCode.legacyMigration.title": "Migrering fra eldre versjon",
   "settings.aboutKiloCode.legacyMigration.description":
-    "Migrer innstillinger fra en tidligere installasjon av Kilo Code, inkludert API-nøkler for leverandører og standardmodell.",
+    "Migrer innstillinger fra en tidligere installasjon av 湛卢, inkludert API-nøkler for leverandører og standardmodell.",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Hva er nytt i Kilo Code",
+  "migration.whatsNew.title": "Hva er nytt i 湛卢",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "Vi har bygget utvidelsen på nytt med et raskere og mer effektivt grunnlag.",
   "migration.whatsNew.features.performance.title": "Raskere agentytelse",

@@ -16,7 +16,7 @@ import {
  * It shows the local workspace diff and forwards review comments back to the sidebar chat.
  */
 export class DiffViewerProvider implements vscode.Disposable {
-  public static readonly viewType = "kilo-code.new.DiffViewerPanel"
+  public static readonly viewType = "zhanlu.DiffViewerPanel"
 
   private panel: vscode.WebviewPanel | undefined
   private diffInterval: ReturnType<typeof setInterval> | undefined
@@ -31,7 +31,7 @@ export class DiffViewerProvider implements vscode.Disposable {
     private readonly connectionService: KiloConnectionService,
   ) {
     this.gitOps = new GitOps({ log: (...args) => this.log(...args) })
-    this.outputChannel = vscode.window.createOutputChannel("Kilo Diff Viewer")
+    this.outputChannel = vscode.window.createOutputChannel("Zhanlu Diff Viewer")
   }
 
   private log(...args: unknown[]) {
@@ -55,8 +55,8 @@ export class DiffViewerProvider implements vscode.Disposable {
     })
 
     this.panel.iconPath = {
-      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-light.svg"),
-      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-dark.svg"),
+      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
+      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
     }
 
     this.panel.webview.onDidReceiveMessage((msg) => this.onMessage(msg), undefined, [])
@@ -76,7 +76,7 @@ export class DiffViewerProvider implements vscode.Disposable {
       this.post({
         type: "ready",
         vscodeLanguage: vscode.env.language,
-        languageOverride: vscode.workspace.getConfiguration("kilo-code.new").get<string>("language"),
+        languageOverride: vscode.workspace.getConfiguration("zhanlu").get<string>("language"),
         workspaceDirectory: getWorkspaceRoot(),
       })
       this.startDiffPolling()

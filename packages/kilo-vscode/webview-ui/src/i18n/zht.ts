@@ -775,7 +775,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL 已複製到剪貼簿",
   "deviceAuth.toast.codeCopied": "驗證碼已複製到剪貼簿",
   "deviceAuth.status.initiating": "正在啟動登入...",
-  "deviceAuth.title": "登入 Kilo Code",
+  "deviceAuth.title": "登入 湛卢",
   "deviceAuth.step1": "步驟 1：開啟此 URL",
   "deviceAuth.action.copyUrl": "複製 URL",
   "deviceAuth.action.openBrowser": "開啟瀏覽器",
@@ -793,7 +793,7 @@ export const dict = {
 
   "profile.title": "個人資料",
   "profile.notLoggedIn": "尚未登入",
-  "profile.action.login": "使用 Kilo Code 登入",
+  "profile.action.login": "使用 湛卢 登入",
   "profile.balance.title": "餘額",
   "profile.balance.refresh": "重新整理餘額",
   "profile.action.dashboard": "控制面板",
@@ -812,10 +812,10 @@ export const dict = {
   "settings.prompts.title": "提示",
   "settings.experimental.title": "實驗性功能",
   "settings.language.title": "語言",
-  "settings.aboutKiloCode.title": "關於 Kilo Code",
+  "settings.aboutKiloCode.title": "關於 湛卢",
 
   "session.messages.empty": "在下方輸入訊息以開始對話。",
-  "session.messages.welcome": "Kilo Code 是一個 AI 程式設計助手。讓它幫你建構功能、修復 bug 或解釋程式碼庫。",
+  "session.messages.welcome": "湛卢 是一個 AI 程式設計助手。讓它幫你建構功能、修復 bug 或解釋程式碼庫。",
   "session.messages.scrollToBottom": "捲動至底部",
   "session.status.writingResponse": "正在撰寫回覆…",
   "session.status.retrying": "正在重試（第 {{ attempt }} 次）… {{ message }}",
@@ -848,14 +848,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "連接埠：",
   "settings.aboutKiloCode.versionInfo": "版本資訊",
   "settings.aboutKiloCode.version.label": "版本：",
-  "settings.aboutKiloCode.extensionName": "Kilo Code 擴充功能",
+  "settings.aboutKiloCode.extensionName": "湛卢 擴充功能",
   "settings.aboutKiloCode.community": "社群與支援",
   "settings.aboutKiloCode.feedback.prefix": "如果您有任何問題或回饋，歡迎在以下平台提交 issue",
   "settings.aboutKiloCode.feedback.or": "或",
   "settings.aboutKiloCode.support.prefix": "如有帳單或帳戶問題，請聯繫客戶支援",
   "settings.aboutKiloCode.resetSettings.title": "重置設定",
   "settings.aboutKiloCode.resetSettings.description":
-    "將所有 Kilo Code 擴充功能設定重置為預設值。這不會影響 CLI 或後端設定。",
+    "將所有 湛卢 擴充功能設定重置為預設值。這不會影響 CLI 或後端設定。",
   "settings.aboutKiloCode.resetSettings.button": "重置所有設定",
 
   "settings.agentBehaviour.subtab.modes": "模式",
@@ -874,7 +874,7 @@ export const dict = {
   "settings.browser.headless.title": "無頭模式",
   "settings.browser.headless.description": "以無頭模式執行（無可見瀏覽器視窗）。",
 
-  "settings.language.description": "選擇 Kilo Code 介面的語言。「自動」使用 VS Code 的顯示語言。",
+  "settings.language.description": "選擇 湛卢 介面的語言。「自動」使用 VS Code 的顯示語言。",
   "settings.language.auto": "自動（VS Code 語言）",
   "settings.language.current": "目前：",
 
@@ -1006,10 +1006,10 @@ export const dict = {
   "settings.legacyMigration.link": "從舊版遷移",
   "settings.aboutKiloCode.legacyMigration.title": "舊版遷移",
   "settings.aboutKiloCode.legacyMigration.description":
-    "從舊版 Kilo Code 安裝遷移設定，包括供應商 API 金鑰和預設模型。",
+    "從舊版 湛卢 安裝遷移設定，包括供應商 API 金鑰和預設模型。",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Kilo Code 新功能",
+  "migration.whatsNew.title": "湛卢 新功能",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "我們在更快、更高效的基礎上重新建構了擴充功能。",
   "migration.whatsNew.features.performance.title": "更快的 Agent 效能",

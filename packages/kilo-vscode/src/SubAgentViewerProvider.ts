@@ -30,15 +30,15 @@ export class SubAgentViewerProvider implements vscode.Disposable {
 
     const label = title ? `Sub-agent: ${title}` : "Sub-agent Viewer"
 
-    const panel = vscode.window.createWebviewPanel("kilo-code.new.SubAgentViewerPanel", label, vscode.ViewColumn.One, {
+    const panel = vscode.window.createWebviewPanel("zhanlu.SubAgentViewerPanel", label, vscode.ViewColumn.One, {
       enableScripts: true,
       retainContextWhenHidden: true,
       localResourceRoots: [this.extensionUri],
     })
 
     panel.iconPath = {
-      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-light.svg"),
-      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-dark.svg"),
+      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
+      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
     }
 
     const provider = new KiloProvider(this.extensionUri, this.connectionService, this.context)

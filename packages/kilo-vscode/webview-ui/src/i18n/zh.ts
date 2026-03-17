@@ -115,7 +115,7 @@ export const dict = {
   "dialog.model.manage": "管理模型",
   "dialog.model.manage.description": "自定义模型选择器中显示的模型。",
 
-  "dialog.model.unpaid.freeModels.title": "Kilo 提供的免费模型",
+  "dialog.model.unpaid.freeModels.title": "湛卢 提供的免费模型",
   "dialog.model.unpaid.addMore.title": "从热门提供商添加更多模型",
 
   "dialog.provider.viewAll": "查看更多提供商",
@@ -387,7 +387,7 @@ export const dict = {
   "toast.session.listFailed.title": "无法加载 {{project}} 的会话",
 
   "toast.update.title": "有可用更新",
-  "toast.update.description": "Kilo 有新版本 ({{version}}) 可安装。",
+  "toast.update.description": "湛卢 有新版本 ({{version}}) 可安装。",
   "toast.update.action.installRestart": "安装并重启",
   "toast.update.action.notYet": "稍后",
 
@@ -535,12 +535,12 @@ export const dict = {
   "sidebar.workspaces.enable": "启用工作区",
   "sidebar.workspaces.disable": "禁用工作区",
   "sidebar.gettingStarted.title": "入门",
-  "sidebar.gettingStarted.line1": "Kilo 提供免费模型，你可以立即开始使用。",
+  "sidebar.gettingStarted.line1": "湛卢 提供免费模型，你可以立即开始使用。",
   "sidebar.gettingStarted.line2": "连接任意提供商即可使用更多模型，如 Claude、GPT、Gemini 等。",
   "sidebar.project.recentSessions": "最近会话",
   "sidebar.project.viewAllSessions": "查看全部会话",
 
-  "app.name.desktop": "Kilo Desktop",
+  "app.name.desktop": "湛卢 桌面",
   "settings.section.desktop": "桌面",
   "settings.section.server": "服务器",
   "settings.tab.general": "通用",
@@ -556,7 +556,7 @@ export const dict = {
   "settings.general.row.appearance.title": "外观",
   "settings.general.row.appearance.description": "自定义 Kilo 在你的设备上的外观",
   "settings.general.row.theme.title": "主题",
-  "settings.general.row.theme.description": "自定义 Kilo 的主题。",
+  "settings.general.row.theme.description": "自定义湛卢的主题。",
   "settings.general.row.font.title": "字体",
   "settings.general.row.font.description": "自定义代码块使用的等宽字体",
   "settings.general.row.releaseNotes.title": "发行说明",
@@ -663,7 +663,7 @@ export const dict = {
   "settings.providers.title": "提供商",
   "settings.providers.description": "提供商设置将在此处可配置。",
   "settings.providers.betaNotice":
-    "目前只能在设置界面中配置 Kilo Gateway 提供商。在 Beta 测试期间即将支持配置其他提供商。在此期间，您可以使用 CLI 或配置文件来配置提供商。我们致力于保持 Kilo 开放，无锁定。",
+    "目前只能在设置界面中配置 湛卢 Gateway 提供商。在 Beta 测试期间即将支持配置其他提供商。在此期间，您可以使用 CLI 或配置文件来配置提供商。我们致力于保持 湛卢 开放，无锁定。",
   "settings.providers.section.connected": "已连接的提供商",
   "settings.providers.connected.empty": "没有已连接的提供商",
   "settings.providers.section.popular": "热门提供商",
@@ -773,7 +773,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL 已复制到剪贴板",
   "deviceAuth.toast.codeCopied": "代码已复制到剪贴板",
   "deviceAuth.status.initiating": "正在启动登录...",
-  "deviceAuth.title": "登录 Kilo Code",
+  "deviceAuth.title": "登录湛卢",
   "deviceAuth.step1": "步骤 1：打开此 URL",
   "deviceAuth.action.copyUrl": "复制 URL",
   "deviceAuth.action.openBrowser": "打开浏览器",
@@ -791,7 +791,7 @@ export const dict = {
 
   "profile.title": "个人资料",
   "profile.notLoggedIn": "未登录",
-  "profile.action.login": "使用 Kilo Code 登录",
+  "profile.action.login": "使用湛卢登录",
   "profile.balance.title": "余额",
   "profile.balance.refresh": "刷新余额",
   "profile.action.dashboard": "控制面板",
@@ -810,10 +810,10 @@ export const dict = {
   "settings.prompts.title": "提示词",
   "settings.experimental.title": "实验性功能",
   "settings.language.title": "语言",
-  "settings.aboutKiloCode.title": "关于 Kilo Code",
+  "settings.aboutKiloCode.title": "关于湛卢",
 
   "session.messages.empty": "在下方输入消息以开始对话。",
-  "session.messages.welcome": "Kilo Code 是一个 AI 编程助手。让它帮你构建功能、修复 bug 或解释代码库。",
+  "session.messages.welcome": "湛卢是您的 AI 开发助手。让它帮你构建功能、修复 bug 或解释代码库。",
   "session.messages.scrollToBottom": "滚动到底部",
   "session.status.writingResponse": "正在撰写回复…",
   "session.status.retrying": "正在重试（第 {{ attempt }} 次）… {{ message }}",
@@ -846,14 +846,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "端口：",
   "settings.aboutKiloCode.versionInfo": "版本信息",
   "settings.aboutKiloCode.version.label": "版本：",
-  "settings.aboutKiloCode.extensionName": "Kilo Code 扩展",
+  "settings.aboutKiloCode.extensionName": "湛卢插件",
   "settings.aboutKiloCode.community": "社区与支持",
   "settings.aboutKiloCode.feedback.prefix": "如果您有任何问题或反馈，欢迎在以下平台提交 issue",
   "settings.aboutKiloCode.feedback.or": "或",
   "settings.aboutKiloCode.support.prefix": "如有账单或账户问题，请联系客户支持",
   "settings.aboutKiloCode.resetSettings.title": "重置设置",
   "settings.aboutKiloCode.resetSettings.description":
-    "将所有 Kilo Code 扩展设置重置为默认值。这不会影响 CLI 或后端配置。",
+    "将所有 湛卢插件设置重置为默认值。这不会影响 CLI 或后端配置。",
   "settings.aboutKiloCode.resetSettings.button": "重置所有设置",
 
   "settings.agentBehaviour.subtab.modes": "模式",
@@ -872,7 +872,7 @@ export const dict = {
   "settings.browser.headless.title": "无头模式",
   "settings.browser.headless.description": "以无头模式运行（无可见浏览器窗口）。",
 
-  "settings.language.description": '"自动"将使用 VS Code 的显示语言。选择 Kilo Code 界面的语言。',
+  "settings.language.description": '"自动"将使用 VS Code 的显示语言。选择湛卢界面的语言。',
   "settings.language.auto": "自动（VS Code 语言）",
   "settings.language.current": "当前：",
 
@@ -1005,10 +1005,10 @@ export const dict = {
   "settings.legacyMigration.link": "从旧版迁移",
   "settings.aboutKiloCode.legacyMigration.title": "旧版迁移",
   "settings.aboutKiloCode.legacyMigration.description":
-    "从旧版 Kilo Code 安装迁移设置，包括提供商 API 密钥和默认模型。",
+    "从旧版湛卢安装迁移设置，包括提供商 API 密钥和默认模型。",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Kilo Code 新功能",
+  "migration.whatsNew.title": "湛卢新功能",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "我们在更快、更高效的基础上重新构建了扩展。",
   "migration.whatsNew.features.performance.title": "更快的智能体性能",

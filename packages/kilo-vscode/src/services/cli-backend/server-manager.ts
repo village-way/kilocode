@@ -73,7 +73,7 @@ export class ServerManager {
           KILO_ENABLE_QUESTION_TOOL: "true",
           KILOCODE_FEATURE: "vscode-extension",
           KILO_TELEMETRY_LEVEL: vscode.env.isTelemetryEnabled ? "all" : "off",
-          KILO_APP_NAME: "kilo-code",
+          KILO_APP_NAME: "zhanlu",
           KILO_EDITOR_NAME: vscode.env.appName,
           KILO_PLATFORM: "vscode",
           KILO_MACHINE_ID: vscode.env.machineId,
@@ -146,7 +146,7 @@ export class ServerManager {
 
   private getCliPath(): string {
     // Always use the bundled binary from the extension directory
-    const binName = process.platform === "win32" ? "kilo.exe" : "kilo"
+    const binName = process.platform === "win32" ? "zhanlu.exe" : "zhanlu"
     const cliPath = path.join(this.context.extensionPath, "bin", binName)
     console.log("[Kilo New] ServerManager: 📦 Using CLI path:", cliPath)
     return cliPath

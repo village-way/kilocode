@@ -15,7 +15,7 @@ const packagesDir = join(kiloVscodeDir, "..")
 const opencodeDir = join(packagesDir, "opencode")
 const opencodeSrcDir = join(opencodeDir, "src")
 const targetBinDir = join(kiloVscodeDir, "bin")
-const targetBinPath = join(targetBinDir, "kilo")
+const targetBinPath = join(targetBinDir, "zhanlu")
 
 let building = false
 let pending = false
@@ -26,7 +26,7 @@ function log(msg: string) {
 }
 
 function sourceBinaryPath(): string {
-  return join(opencodeDir, "dist", `@kilocode/cli-${process.platform}-${process.arch}`, "bin", "kilo")
+  return join(opencodeDir, "dist", `@kilocode/cli-${process.platform}-${process.arch}`, "bin", "zhanlu")
 }
 
 async function rebuild() {
@@ -60,7 +60,7 @@ async function rebuild() {
     chmodSync(targetBinPath, 0o755)
 
     const elapsed = ((performance.now() - start) / 1000).toFixed(1)
-    log(`Binary updated (${elapsed}s): ${relative(packagesDir, source)} -> bin/kilo`)
+    log(`Binary updated (${elapsed}s): ${relative(packagesDir, source)} -> bin/zhanlu`)
   } catch (err) {
     log(`ERROR: ${err instanceof Error ? err.message : String(err)}`)
   } finally {

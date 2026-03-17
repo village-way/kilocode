@@ -64,11 +64,11 @@ describe("commit-message service", () => {
       expect(disposables.length).toBeGreaterThan(0)
     })
 
-    it("registers the kilo-code.new.generateCommitMessage command", () => {
+    it("registers the zhanlu.generateCommitMessage command", () => {
       registerCommitMessageService(mockContext, mockConnectionService)
 
       expect(vscode.commands.registerCommand).toHaveBeenCalledWith(
-        "kilo-code.new.generateCommitMessage",
+        "zhanlu.generateCommitMessage",
         expect.any(Function),
       )
     })
@@ -130,7 +130,7 @@ describe("commit-message service", () => {
       await commandCallback()
 
       expect(vscode.window.showErrorMessage).toHaveBeenCalledWith(
-        "Kilo backend is not connected. Please wait for the connection to establish.",
+        "Zhanlu backend is not connected. Please wait for the connection to establish.",
       )
     })
 

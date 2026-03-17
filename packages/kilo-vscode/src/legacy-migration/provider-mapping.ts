@@ -129,7 +129,7 @@ export const PROVIDER_MAP: Record<string, ProviderMapping> = {
   kilocode: {
     id: "kilo",
     key: "kilocodeToken",
-    name: "Kilo (Gateway)",
+    name: "Zhanlu (Gateway)",
     modelField: "kilocodeModel",
     organizationIdField: "kilocodeOrganizationId",
   },

@@ -789,7 +789,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL kopiran u međuspremnik",
   "deviceAuth.toast.codeCopied": "Kod kopiran u međuspremnik",
   "deviceAuth.status.initiating": "Pokretanje prijave...",
-  "deviceAuth.title": "Prijavite se u Kilo Code",
+  "deviceAuth.title": "Prijavite se u 湛卢",
   "deviceAuth.step1": "Korak 1: Otvorite ovaj URL",
   "deviceAuth.action.copyUrl": "Kopiraj URL",
   "deviceAuth.action.openBrowser": "Otvori preglednik",
@@ -807,7 +807,7 @@ export const dict = {
 
   "profile.title": "Profil",
   "profile.notLoggedIn": "Niste prijavljeni",
-  "profile.action.login": "Prijavite se putem Kilo Code",
+  "profile.action.login": "Prijavite se putem 湛卢",
   "profile.balance.title": "Stanje",
   "profile.balance.refresh": "Osvježi stanje",
   "profile.action.dashboard": "Kontrolna ploča",
@@ -826,11 +826,11 @@ export const dict = {
   "settings.prompts.title": "Upiti",
   "settings.experimental.title": "Eksperimentalno",
   "settings.language.title": "Jezik",
-  "settings.aboutKiloCode.title": "O Kilo Code-u",
+  "settings.aboutKiloCode.title": "O 湛卢-u",
 
   "session.messages.empty": "Započnite razgovor unosom poruke ispod.",
   "session.messages.welcome":
-    "Kilo Code je AI asistent za programiranje. Zatražite da gradi funkcionalnosti, ispravlja greške ili objasni vašu bazu koda.",
+    "湛卢 je AI asistent za programiranje. Zatražite da gradi funkcionalnosti, ispravlja greške ili objasni vašu bazu koda.",
   "session.messages.scrollToBottom": "Pomakni se na dno",
   "session.status.writingResponse": "Pisanje odgovora…",
   "session.status.retrying": "Ponovni pokušaj (pokušaj {{ attempt }})… {{ message }}",
@@ -863,14 +863,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "Port:",
   "settings.aboutKiloCode.versionInfo": "Informacije o verziji",
   "settings.aboutKiloCode.version.label": "Verzija:",
-  "settings.aboutKiloCode.extensionName": "Kilo Code ekstenzija",
+  "settings.aboutKiloCode.extensionName": "湛卢 ekstenzija",
   "settings.aboutKiloCode.community": "Zajednica i podrška",
   "settings.aboutKiloCode.feedback.prefix": "Ako imate pitanja ili povratne informacije, slobodno otvorite issue na",
   "settings.aboutKiloCode.feedback.or": "ili",
   "settings.aboutKiloCode.support.prefix": "Za pitanja o naplati ili računu, kontaktirajte korisničku podršku na",
   "settings.aboutKiloCode.resetSettings.title": "Resetovanje postavki",
   "settings.aboutKiloCode.resetSettings.description":
-    "Resetujte sve postavke Kilo Code ekstenzije na zadane vrijednosti. Ovo ne utiče na CLI ili backend konfiguraciju.",
+    "Resetujte sve postavke 湛卢 ekstenzije na zadane vrijednosti. Ovo ne utiče na CLI ili backend konfiguraciju.",
   "settings.aboutKiloCode.resetSettings.button": "Resetuj sve postavke",
 
   "settings.agentBehaviour.subtab.modes": "Modovi",
@@ -890,7 +890,7 @@ export const dict = {
   "settings.browser.headless.title": "Headless način",
   "settings.browser.headless.description": "Pokreni u headless načinu (bez vidljivog prozora preglednika).",
 
-  "settings.language.description": 'Odaberite jezik za Kilo Code sučelje. "Auto" koristi jezik prikaza VS Code-a.',
+  "settings.language.description": 'Odaberite jezik za 湛卢 sučelje. "Auto" koristi jezik prikaza VS Code-a.',
   "settings.language.auto": "Auto (VS Code jezik)",
   "settings.language.current": "Trenutni:",
 
@@ -1038,10 +1038,10 @@ export const dict = {
   "settings.legacyMigration.link": "Migriraj sa prethodne verzije",
   "settings.aboutKiloCode.legacyMigration.title": "Migracija sa prethodne verzije",
   "settings.aboutKiloCode.legacyMigration.description":
-    "Migrirajte postavke iz prethodne instalacije Kilo Code, uključujući API ključeve provajdera i podrazumijevani model.",
+    "Migrirajte postavke iz prethodne instalacije 湛卢, uključujući API ključeve provajdera i podrazumijevani model.",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Šta je novo u Kilo Code",
+  "migration.whatsNew.title": "Šta je novo u 湛卢",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "Ponovo smo izgradili ekstenziju na bržem i efikasnijem temelju.",
   "migration.whatsNew.features.performance.title": "Brže performanse agenta",

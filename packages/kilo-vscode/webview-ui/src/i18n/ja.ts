@@ -783,7 +783,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URLをクリップボードにコピーしました",
   "deviceAuth.toast.codeCopied": "コードをクリップボードにコピーしました",
   "deviceAuth.status.initiating": "ログインを開始しています...",
-  "deviceAuth.title": "Kilo Codeにサインイン",
+  "deviceAuth.title": "湛卢にサインイン",
   "deviceAuth.step1": "ステップ1：このURLを開く",
   "deviceAuth.action.copyUrl": "URLをコピー",
   "deviceAuth.action.openBrowser": "ブラウザを開く",
@@ -801,7 +801,7 @@ export const dict = {
 
   "profile.title": "プロフィール",
   "profile.notLoggedIn": "ログインしていません",
-  "profile.action.login": "Kilo Codeでログイン",
+  "profile.action.login": "湛卢でログイン",
   "profile.balance.title": "残高",
   "profile.balance.refresh": "残高を更新",
   "profile.action.dashboard": "ダッシュボード",
@@ -820,11 +820,11 @@ export const dict = {
   "settings.prompts.title": "プロンプト",
   "settings.experimental.title": "実験的機能",
   "settings.language.title": "言語",
-  "settings.aboutKiloCode.title": "Kilo Codeについて",
+  "settings.aboutKiloCode.title": "湛卢について",
 
   "session.messages.empty": "下にメッセージを入力して会話を始めましょう。",
   "session.messages.welcome":
-    "Kilo CodeはAIコーディングアシスタントです。機能の構築、バグの修正、コードベースの説明を依頼できます。",
+    "湛卢はAIコーディングアシスタントです。機能の構築、バグの修正、コードベースの説明を依頼できます。",
   "session.messages.scrollToBottom": "下にスクロール",
   "session.status.writingResponse": "応答を作成中…",
   "session.status.retrying": "再試行中（{{ attempt }}回目）… {{ message }}",
@@ -857,7 +857,7 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "ポート：",
   "settings.aboutKiloCode.versionInfo": "バージョン情報",
   "settings.aboutKiloCode.version.label": "バージョン：",
-  "settings.aboutKiloCode.extensionName": "Kilo Code拡張機能",
+  "settings.aboutKiloCode.extensionName": "湛卢拡張機能",
   "settings.aboutKiloCode.community": "コミュニティとサポート",
   "settings.aboutKiloCode.feedback.prefix": "ご質問やフィードバックがありましたら、お気軽にissueを作成してください",
   "settings.aboutKiloCode.feedback.or": "または",
@@ -865,7 +865,7 @@ export const dict = {
     "請求やアカウントに関するご質問は、カスタマーサポートまでお問い合わせください",
   "settings.aboutKiloCode.resetSettings.title": "設定をリセット",
   "settings.aboutKiloCode.resetSettings.description":
-    "Kilo Code拡張機能のすべての設定をデフォルト値にリセットします。CLIやバックエンドの設定には影響しません。",
+    "湛卢拡張機能のすべての設定をデフォルト値にリセットします。CLIやバックエンドの設定には影響しません。",
   "settings.aboutKiloCode.resetSettings.button": "すべての設定をリセット",
 
   "settings.agentBehaviour.subtab.modes": "モード",
@@ -885,7 +885,7 @@ export const dict = {
   "settings.browser.headless.title": "ヘッドレスモード",
   "settings.browser.headless.description": "ヘッドレスモードで実行します（ブラウザウィンドウは表示されません）。",
 
-  "settings.language.description": "Kilo Code UIの言語を選択します。「自動」はVS Codeの表示言語を使用します。",
+  "settings.language.description": "湛卢 UIの言語を選択します。「自動」はVS Codeの表示言語を使用します。",
   "settings.language.auto": "自動（VS Code言語）",
   "settings.language.current": "現在：",
 
@@ -1030,10 +1030,10 @@ export const dict = {
   "settings.legacyMigration.link": "レガシーバージョンからの移行",
   "settings.aboutKiloCode.legacyMigration.title": "レガシー移行",
   "settings.aboutKiloCode.legacyMigration.description":
-    "プロバイダーのAPIキーやデフォルトモデルなど、以前にインストールしたKilo Codeから設定を移行します。",
+    "プロバイダーのAPIキーやデフォルトモデルなど、以前にインストールした湛卢から設定を移行します。",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Kilo Codeの新機能",
+  "migration.whatsNew.title": "湛卢の新機能",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "より高速で効率的な基盤上に拡張機能を再構築しました。",
   "migration.whatsNew.features.performance.title": "高速なエージェントパフォーマンス",

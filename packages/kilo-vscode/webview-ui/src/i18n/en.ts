@@ -548,12 +548,12 @@ export const dict = {
   "sidebar.workspaces.enable": "Enable workspaces",
   "sidebar.workspaces.disable": "Disable workspaces",
   "sidebar.gettingStarted.title": "Getting started",
-  "sidebar.gettingStarted.line1": "Kilo includes free models so you can start immediately.",
+  "sidebar.gettingStarted.line1": "Zhanlu includes free models so you can start immediately.",
   "sidebar.gettingStarted.line2": "Connect any provider to use models, inc. Claude, GPT, Gemini etc.",
   "sidebar.project.recentSessions": "Recent sessions",
   "sidebar.project.viewAllSessions": "View all sessions",
 
-  "app.name.desktop": "Kilo Desktop",
+  "app.name.desktop": "Zhanlu Desktop",
 
   "settings.section.desktop": "Desktop",
   "settings.section.server": "Server",
@@ -570,7 +570,7 @@ export const dict = {
   "settings.general.row.appearance.title": "Appearance",
   "settings.general.row.appearance.description": "Customise how Kilo looks on your device",
   "settings.general.row.theme.title": "Theme",
-  "settings.general.row.theme.description": "Customise how Kilo is themed.",
+  "settings.general.row.theme.description": "Customise how Zhanlu is themed.",
   "settings.general.row.font.title": "Font",
   "settings.general.row.font.description": "Customise the mono font used in code blocks",
 
@@ -679,7 +679,7 @@ export const dict = {
   "settings.providers.title": "Providers",
   "settings.providers.description": "Provider settings will be configurable here.",
   "settings.providers.betaNotice":
-    "Currently only the Kilo Gateway provider can be configured in the settings interface. Support for configuring other providers is coming soon during the beta period. In the interim you can configure providers using the CLI or config file. We're committed to keeping Kilo open, no lock-in.",
+    "Currently only the Zhanlu Gateway provider can be configured in the settings interface. Support for configuring other providers is coming soon during the beta period. In the interim you can configure providers using the CLI or config file. We're committed to keeping Zhanlu open, no lock-in.",
   "settings.providers.section.connected": "Connected providers",
   "settings.providers.connected.empty": "No connected providers",
   "settings.providers.section.popular": "Popular providers",
@@ -789,7 +789,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL copied to clipboard",
   "deviceAuth.toast.codeCopied": "Code copied to clipboard",
   "deviceAuth.status.initiating": "Starting login...",
-  "deviceAuth.title": "Sign in to Kilo Code",
+  "deviceAuth.title": "Sign in to 湛卢",
   "deviceAuth.step1": "Step 1: Open this URL",
   "deviceAuth.action.copyUrl": "Copy URL",
   "deviceAuth.action.openBrowser": "Open Browser",
@@ -807,7 +807,7 @@ export const dict = {
 
   "profile.title": "Profile",
   "profile.notLoggedIn": "Not logged in",
-  "profile.action.login": "Login with Kilo Code",
+  "profile.action.login": "Login with 湛卢",
   "profile.balance.title": "Balance",
   "profile.balance.refresh": "Refresh balance",
   "profile.action.dashboard": "Dashboard",
@@ -826,11 +826,11 @@ export const dict = {
   "settings.prompts.title": "Prompts",
   "settings.experimental.title": "Experimental",
   "settings.language.title": "Language",
-  "settings.aboutKiloCode.title": "About Kilo Code",
+  "settings.aboutKiloCode.title": "About 湛卢",
 
   "session.messages.empty": "Start a conversation by typing a message below.",
   "session.messages.welcome":
-    "Kilo Code is an AI coding assistant. Ask it to build features, fix bugs, or explain your codebase.",
+    "湛卢 is your AI development assistant. Ask it to build features, fix bugs, or explain your codebase.",
   "session.messages.scrollToBottom": "Scroll to bottom",
   "session.status.writingResponse": "Writing response...",
   "session.status.retrying": "Retrying (attempt {{ attempt }})… {{ message }}",
@@ -864,14 +864,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "Port:",
   "settings.aboutKiloCode.versionInfo": "Version Information",
   "settings.aboutKiloCode.version.label": "Version:",
-  "settings.aboutKiloCode.extensionName": "Kilo Code Extension",
+  "settings.aboutKiloCode.extensionName": "湛卢 Extension",
   "settings.aboutKiloCode.community": "Community & Support",
   "settings.aboutKiloCode.feedback.prefix": "If you have any questions or feedback, feel free to open an issue on",
   "settings.aboutKiloCode.feedback.or": "or",
   "settings.aboutKiloCode.support.prefix": "For billing or account questions, contact Customer Support at",
   "settings.aboutKiloCode.resetSettings.title": "Reset Settings",
   "settings.aboutKiloCode.resetSettings.description":
-    "Reset all Kilo Code extension settings to their default values. This does not affect CLI or backend configuration.",
+    "Reset all 湛卢 extension settings to their default values. This does not affect CLI or backend configuration.",
   "settings.aboutKiloCode.resetSettings.button": "Reset All Settings",
 
   "settings.agentBehaviour.subtab.modes": "Modes",
@@ -892,7 +892,7 @@ export const dict = {
   "settings.browser.headless.description": "Run in headless mode (no visible browser window).",
 
   "settings.language.description":
-    'Choose the language for the Kilo Code UI. "Auto" uses your VS Code display language.',
+    'Choose the language for the 湛卢 UI. "Auto" uses your VS Code display language.',
   "settings.language.auto": "Auto (VS Code language)",
   "settings.language.current": "Current:",
 
@@ -1049,10 +1049,10 @@ export const dict = {
   "settings.legacyMigration.link": "Migrate from Legacy Version",
   "settings.aboutKiloCode.legacyMigration.title": "Legacy Migration",
   "settings.aboutKiloCode.legacyMigration.description":
-    "Migrate settings from a previous installation of Kilo Code, including provider API keys and default model.",
+    "Migrate settings from a previous installation of 湛卢, including provider API keys and default model.",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "What's New in Kilo Code",
+  "migration.whatsNew.title": "What's New in 湛卢",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "We've rebuilt the extension on a faster, more efficient foundation.",
   "migration.whatsNew.features.performance.title": "Faster Agent Performance",

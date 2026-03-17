@@ -32,17 +32,17 @@ export class SettingsEditorProvider implements vscode.Disposable {
       return
     }
 
-    const title = view === "settings" ? "Kilo Settings" : "Kilo Profile"
+    const title = view === "settings" ? "Zhanlu Settings" : "Zhanlu Profile"
 
-    const panel = vscode.window.createWebviewPanel(`kilo-code.new.${view}Panel`, title, vscode.ViewColumn.One, {
+    const panel = vscode.window.createWebviewPanel(`zhanlu.${view}Panel`, title, vscode.ViewColumn.One, {
       enableScripts: true,
       retainContextWhenHidden: true,
       localResourceRoots: [this.extensionUri],
     })
 
     panel.iconPath = {
-      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-light.svg"),
-      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-dark.svg"),
+      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
+      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
     }
 
     // Create a dedicated KiloProvider for this panel so it has full

@@ -23,7 +23,7 @@ export function registerCommitMessageService(
   context: vscode.ExtensionContext,
   connectionService: KiloConnectionService,
 ): vscode.Disposable[] {
-  const command = vscode.commands.registerCommand("kilo-code.new.generateCommitMessage", async () => {
+  const command = vscode.commands.registerCommand("zhanlu.generateCommitMessage", async () => {
     const extension = vscode.extensions.getExtension<GitExtensionExports>("vscode.git")
     if (!extension) {
       vscode.window.showErrorMessage("Git extension not found")
@@ -45,11 +45,11 @@ export function registerCommitMessageService(
     try {
       client = connectionService.getClient()
     } catch {
-      vscode.window.showErrorMessage("Kilo backend is not connected. Please wait for the connection to establish.")
+      vscode.window.showErrorMessage("Zhanlu backend is not connected. Please wait for the connection to establish.")
       return
     }
     if (!client) {
-      vscode.window.showErrorMessage("Kilo backend is not connected. Please wait for the connection to establish.")
+      vscode.window.showErrorMessage("Zhanlu backend is not connected. Please wait for the connection to establish.")
       return
     }
 

@@ -393,20 +393,20 @@ export class WorktreeManager {
     const gitDir = await this.resolveGitDir()
     const excludePath = path.join(gitDir, "info", "exclude")
     const items = [
-      [".kilo/worktrees/", "Kilo Code agent worktrees"],
-      [".kilo/agent-manager.json", "Kilo Agent Manager state"],
-      [".kilo/setup-script", "Kilo Code worktree setup script"],
-      [".kilo/setup-script.sh", "Kilo Code worktree setup script"],
-      [".kilo/setup-script.ps1", "Kilo Code worktree setup script"],
-      [".kilo/setup-script.cmd", "Kilo Code worktree setup script"],
-      [".kilo/setup-script.bat", "Kilo Code worktree setup script"],
-      [".kilocode/worktrees/", "Kilo Code legacy agent worktrees"],
-      [".kilocode/agent-manager.json", "Kilo Agent Manager legacy state"],
-      [".kilocode/setup-script", "Kilo Code legacy worktree setup script"],
-      [".kilocode/setup-script.sh", "Kilo Code legacy worktree setup script"],
-      [".kilocode/setup-script.ps1", "Kilo Code legacy worktree setup script"],
-      [".kilocode/setup-script.cmd", "Kilo Code legacy worktree setup script"],
-      [".kilocode/setup-script.bat", "Kilo Code legacy worktree setup script"],
+      [".kilo/worktrees/", "Zhanlu agent worktrees"],
+      [".kilo/agent-manager.json", "Zhanlu Agent Manager state"],
+      [".kilo/setup-script", "Zhanlu worktree setup script"],
+      [".kilo/setup-script.sh", "Zhanlu worktree setup script"],
+      [".kilo/setup-script.ps1", "Zhanlu worktree setup script"],
+      [".kilo/setup-script.cmd", "Zhanlu worktree setup script"],
+      [".kilo/setup-script.bat", "Zhanlu worktree setup script"],
+      [".kilocode/worktrees/", "Zhanlu legacy agent worktrees"],
+      [".kilocode/agent-manager.json", "Zhanlu Agent Manager legacy state"],
+      [".kilocode/setup-script", "Zhanlu legacy worktree setup script"],
+      [".kilocode/setup-script.sh", "Zhanlu legacy worktree setup script"],
+      [".kilocode/setup-script.ps1", "Zhanlu legacy worktree setup script"],
+      [".kilocode/setup-script.cmd", "Zhanlu legacy worktree setup script"],
+      [".kilocode/setup-script.bat", "Zhanlu legacy worktree setup script"],
     ] as const
 
     for (const [entry, comment] of items) {
@@ -422,7 +422,7 @@ export class WorktreeManager {
 
       const worktreeGitDir = path.resolve(worktreePath, match[1].trim())
       const mainGitDir = path.dirname(path.dirname(worktreeGitDir))
-      await this.addExcludeEntry(path.join(mainGitDir, "info", "exclude"), `${KILO_DIR}/`, "Kilo Code session metadata")
+      await this.addExcludeEntry(path.join(mainGitDir, "info", "exclude"), `${KILO_DIR}/`, "湛卢 session metadata")
     } catch (error) {
       this.log(`Warning: Failed to update git exclude for worktree: ${error}`)
     }

@@ -794,7 +794,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "URL in die Zwischenablage kopiert",
   "deviceAuth.toast.codeCopied": "Code in die Zwischenablage kopiert",
   "deviceAuth.status.initiating": "Anmeldung wird gestartet...",
-  "deviceAuth.title": "Bei Kilo Code anmelden",
+  "deviceAuth.title": "Bei 湛卢 anmelden",
   "deviceAuth.step1": "Schritt 1: Diese URL öffnen",
   "deviceAuth.action.copyUrl": "URL kopieren",
   "deviceAuth.action.openBrowser": "Browser öffnen",
@@ -812,7 +812,7 @@ export const dict = {
 
   "profile.title": "Profil",
   "profile.notLoggedIn": "Nicht angemeldet",
-  "profile.action.login": "Mit Kilo Code anmelden",
+  "profile.action.login": "Mit 湛卢 anmelden",
   "profile.balance.title": "Guthaben",
   "profile.balance.refresh": "Guthaben aktualisieren",
   "profile.action.dashboard": "Dashboard",
@@ -831,11 +831,11 @@ export const dict = {
   "settings.prompts.title": "Prompts",
   "settings.experimental.title": "Experimentell",
   "settings.language.title": "Sprache",
-  "settings.aboutKiloCode.title": "Über Kilo Code",
+  "settings.aboutKiloCode.title": "Über 湛卢",
 
   "session.messages.empty": "Starten Sie eine Unterhaltung, indem Sie unten eine Nachricht eingeben.",
   "session.messages.welcome":
-    "Kilo Code ist ein KI-Programmierassistent. Bitten Sie ihn, Funktionen zu erstellen, Fehler zu beheben oder Ihre Codebasis zu erklären.",
+    "湛卢 ist ein KI-Programmierassistent. Bitten Sie ihn, Funktionen zu erstellen, Fehler zu beheben oder Ihre Codebasis zu erklären.",
   "session.messages.scrollToBottom": "Nach unten scrollen",
   "session.status.writingResponse": "Antwort wird geschrieben…",
   "session.status.retrying": "Erneuter Versuch ({{ attempt }})… {{ message }}",
@@ -868,7 +868,7 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "Port:",
   "settings.aboutKiloCode.versionInfo": "Versionsinformationen",
   "settings.aboutKiloCode.version.label": "Version:",
-  "settings.aboutKiloCode.extensionName": "Kilo Code Erweiterung",
+  "settings.aboutKiloCode.extensionName": "湛卢 Erweiterung",
   "settings.aboutKiloCode.community": "Community & Support",
   "settings.aboutKiloCode.feedback.prefix": "Bei Fragen oder Feedback können Sie ein Issue eröffnen auf",
   "settings.aboutKiloCode.feedback.or": "oder",
@@ -876,7 +876,7 @@ export const dict = {
     "Bei Abrechnungs- oder Kontofragen wenden Sie sich an den Kundensupport unter",
   "settings.aboutKiloCode.resetSettings.title": "Einstellungen zurücksetzen",
   "settings.aboutKiloCode.resetSettings.description":
-    "Alle Kilo Code-Erweiterungseinstellungen auf Standardwerte zurücksetzen. Dies hat keinen Einfluss auf die CLI- oder Backend-Konfiguration.",
+    "Alle 湛卢-Erweiterungseinstellungen auf Standardwerte zurücksetzen. Dies hat keinen Einfluss auf die CLI- oder Backend-Konfiguration.",
   "settings.aboutKiloCode.resetSettings.button": "Alle Einstellungen zurücksetzen",
 
   "settings.agentBehaviour.subtab.modes": "Modi",
@@ -897,7 +897,7 @@ export const dict = {
   "settings.browser.headless.description": "Im Headless-Modus ausführen (kein sichtbares Browserfenster).",
 
   "settings.language.description":
-    'Wählen Sie die Sprache für die Kilo Code Oberfläche. „Auto" verwendet die VS Code Anzeigesprache.',
+    'Wählen Sie die Sprache für die 湛卢 Oberfläche. „Auto" verwendet die VS Code Anzeigesprache.',
   "settings.language.auto": "Auto (VS Code Sprache)",
   "settings.language.current": "Aktuell:",
 
@@ -1049,10 +1049,10 @@ export const dict = {
   "settings.legacyMigration.link": "Von der Legacy-Version migrieren",
   "settings.aboutKiloCode.legacyMigration.title": "Legacy-Migration",
   "settings.aboutKiloCode.legacyMigration.description":
-    "Migrieren Sie Einstellungen von einer früheren Installation von Kilo Code, einschließlich Anbieter-API-Schlüsseln und dem Standardmodell.",
+    "Migrieren Sie Einstellungen von einer früheren Installation von 湛卢, einschließlich Anbieter-API-Schlüsseln und dem Standardmodell.",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Neuigkeiten in Kilo Code",
+  "migration.whatsNew.title": "Neuigkeiten in 湛卢",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle":
     "Wir haben die Erweiterung auf einer schnelleren, effizienteren Grundlage neu aufgebaut.",

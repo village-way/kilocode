@@ -37,7 +37,7 @@ const PLATFORM = "agent-manager" as const
 const LOCAL_DIFF_ID = "local" as const
 
 export class AgentManagerProvider implements vscode.Disposable {
-  public static readonly viewType = "kilo-code.new.AgentManagerPanel"
+  public static readonly viewType = "zhanlu.AgentManagerPanel"
 
   private panel: vscode.WebviewPanel | undefined
   private provider: KiloProvider | undefined
@@ -67,7 +67,7 @@ export class AgentManagerProvider implements vscode.Disposable {
     private readonly extensionUri: vscode.Uri,
     private readonly connectionService: KiloConnectionService,
   ) {
-    this.outputChannel = vscode.window.createOutputChannel("Kilo Agent Manager")
+    this.outputChannel = vscode.window.createOutputChannel("Zhanlu Agent Manager")
     this.terminalManager = new SessionTerminalManager(
       (msg) => this.outputChannel.appendLine(`[SessionTerminal] ${msg}`),
       createTerminalHost(),
@@ -141,8 +141,8 @@ export class AgentManagerProvider implements vscode.Disposable {
     }
 
     panel.iconPath = {
-      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-light.svg"),
-      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "kilo-dark.svg"),
+      light: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
+      dark: vscode.Uri.joinPath(this.extensionUri, "assets", "icons", "icon.svg"),
     }
 
     panel.webview.html = this.getHtml(panel.webview)
@@ -1325,17 +1325,17 @@ export class AgentManagerProvider implements vscode.Disposable {
   // ---------------------------------------------------------------------------
 
   private sendKeybindings(): void {
-    const ext = vscode.extensions.getExtension("kilocode.kilo-code")
+    const ext = vscode.extensions.getExtension("ecloud.zhanlu")
     const keybindings: Array<{ command: string; key?: string; mac?: string }> =
       ext?.packageJSON?.contributes?.keybindings ?? []
 
     const mac = process.platform === "darwin"
-    const prefix = "kilo-code.new.agentManager."
+    const prefix = "zhanlu.agentManager."
     const bindings: Record<string, string> = {}
 
     // Global keybindings exposed to the shortcuts dialog
     const globals: Record<string, string> = {
-      "kilo-code.new.agentManagerOpen": "agentManagerOpen",
+      "zhanlu.agentManagerOpen": "agentManagerOpen",
     }
 
     for (const kb of keybindings) {

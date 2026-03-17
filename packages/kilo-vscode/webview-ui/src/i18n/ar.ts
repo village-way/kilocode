@@ -778,7 +778,7 @@ export const dict = {
   "deviceAuth.toast.urlCopied": "تم نسخ الرابط إلى الحافظة",
   "deviceAuth.toast.codeCopied": "تم نسخ الرمز إلى الحافظة",
   "deviceAuth.status.initiating": "جارٍ بدء تسجيل الدخول...",
-  "deviceAuth.title": "تسجيل الدخول إلى Kilo Code",
+  "deviceAuth.title": "تسجيل الدخول إلى 湛卢",
   "deviceAuth.step1": "الخطوة 1: افتح هذا الرابط",
   "deviceAuth.action.copyUrl": "نسخ الرابط",
   "deviceAuth.action.openBrowser": "فتح المتصفح",
@@ -796,7 +796,7 @@ export const dict = {
 
   "profile.title": "الملف الشخصي",
   "profile.notLoggedIn": "لم يتم تسجيل الدخول",
-  "profile.action.login": "تسجيل الدخول باستخدام Kilo Code",
+  "profile.action.login": "تسجيل الدخول باستخدام 湛卢",
   "profile.balance.title": "الرصيد",
   "profile.balance.refresh": "تحديث الرصيد",
   "profile.action.dashboard": "لوحة التحكم",
@@ -815,11 +815,11 @@ export const dict = {
   "settings.prompts.title": "الموجهات",
   "settings.experimental.title": "تجريبي",
   "settings.language.title": "اللغة",
-  "settings.aboutKiloCode.title": "حول Kilo Code",
+  "settings.aboutKiloCode.title": "حول 湛卢",
 
   "session.messages.empty": "ابدأ محادثة بكتابة رسالة أدناه.",
   "session.messages.welcome":
-    "Kilo Code هو مساعد ترميز بالذكاء الاصطناعي. اطلب منه بناء ميزات أو إصلاح أخطاء أو شرح قاعدة الشيفرة.",
+    "湛卢 هو مساعد ترميز بالذكاء الاصطناعي. اطلب منه بناء ميزات أو إصلاح أخطاء أو شرح قاعدة الشيفرة.",
   "session.messages.scrollToBottom": "التمرير إلى الأسفل",
   "session.status.writingResponse": "...جارٍ كتابة الرد",
   "session.status.retrying": "...إعادة المحاولة (المحاولة {{ attempt }})… {{ message }}",
@@ -852,14 +852,14 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "المنفذ:",
   "settings.aboutKiloCode.versionInfo": "معلومات الإصدار",
   "settings.aboutKiloCode.version.label": "الإصدار:",
-  "settings.aboutKiloCode.extensionName": "إضافة Kilo Code",
+  "settings.aboutKiloCode.extensionName": "إضافة 湛卢",
   "settings.aboutKiloCode.community": "المجتمع والدعم",
   "settings.aboutKiloCode.feedback.prefix": "إذا كان لديك أي أسئلة أو ملاحظات، لا تتردد في فتح مشكلة على",
   "settings.aboutKiloCode.feedback.or": "أو",
   "settings.aboutKiloCode.support.prefix": "لأسئلة الفوترة أو الحساب، تواصل مع دعم العملاء على",
   "settings.aboutKiloCode.resetSettings.title": "إعادة تعيين الإعدادات",
   "settings.aboutKiloCode.resetSettings.description":
-    "إعادة تعيين جميع إعدادات إضافة Kilo Code إلى قيمها الافتراضية. لا يؤثر هذا على تكوين CLI أو الواجهة الخلفية.",
+    "إعادة تعيين جميع إعدادات إضافة 湛卢 إلى قيمها الافتراضية. لا يؤثر هذا على تكوين CLI أو الواجهة الخلفية.",
   "settings.aboutKiloCode.resetSettings.button": "إعادة تعيين جميع الإعدادات",
 
   "settings.agentBehaviour.subtab.modes": "الأوضاع",
@@ -878,7 +878,7 @@ export const dict = {
   "settings.browser.headless.title": "الوضع بدون واجهة",
   "settings.browser.headless.description": "التشغيل في الوضع بدون واجهة (بدون نافذة متصفح مرئية).",
 
-  "settings.language.description": 'اختر اللغة لواجهة Kilo Code. "تلقائي" يستخدم لغة عرض VS Code.',
+  "settings.language.description": 'اختر اللغة لواجهة 湛卢. "تلقائي" يستخدم لغة عرض VS Code.',
   "settings.language.auto": "تلقائي (لغة VS Code)",
   "settings.language.current": "الحالية:",
 
@@ -1018,10 +1018,10 @@ export const dict = {
   "settings.legacyMigration.link": "الترحيل من الإصدار القديم",
   "settings.aboutKiloCode.legacyMigration.title": "ترحيل الإصدار القديم",
   "settings.aboutKiloCode.legacyMigration.description":
-    "ترحيل الإعدادات من تثبيت سابق لـ Kilo Code، بما في ذلك مفاتيح API لمقدمي الخدمة والنموذج الافتراضي.",
+    "ترحيل الإعدادات من تثبيت سابق لـ 湛卢، بما في ذلك مفاتيح API لمقدمي الخدمة والنموذج الافتراضي.",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "ما الجديد في Kilo Code",
+  "migration.whatsNew.title": "ما الجديد في 湛卢",
   "migration.whatsNew.badge": "Beta",
   "migration.whatsNew.subtitle": "لقد أعدنا بناء الإضافة على أساس أسرع وأكثر كفاءة.",
   "migration.whatsNew.features.performance.title": "أداء أسرع للوكيل",

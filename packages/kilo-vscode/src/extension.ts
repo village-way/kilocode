@@ -13,7 +13,7 @@ import { registerCommitMessageService } from "./services/commit-message"
 import { registerCodeActions, registerTerminalActions, KiloCodeActionProvider } from "./services/code-actions"
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("Kilo Code extension is now active")
+  console.log("湛卢 extension is now active")
 
   const telemetry = TelemetryProxy.getInstance()
 
@@ -77,91 +77,91 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register toolbar button command handlers
   context.subscriptions.push(
-    vscode.commands.registerCommand("kilo-code.new.plusButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.plusButtonClicked", () => {
       provider.postMessage({ type: "action", action: "plusButtonClicked" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManagerOpen", () => {
+    vscode.commands.registerCommand("zhanlu.agentManagerOpen", () => {
       agentManagerProvider.openPanel()
     }),
-    vscode.commands.registerCommand("kilo-code.new.marketplaceButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.marketplaceButtonClicked", () => {
       provider.postMessage({ type: "action", action: "marketplaceButtonClicked" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.historyButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.historyButtonClicked", () => {
       provider.postMessage({ type: "action", action: "historyButtonClicked" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.cloudHistoryButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.cloudHistoryButtonClicked", () => {
       provider.postMessage({ type: "action", action: "cloudHistoryButtonClicked" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.profileButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.profileButtonClicked", () => {
       settingsEditorProvider.openPanel("profile")
     }),
-    vscode.commands.registerCommand("kilo-code.new.settingsButtonClicked", () => {
+    vscode.commands.registerCommand("zhanlu.settingsButtonClicked", () => {
       settingsEditorProvider.openPanel("settings")
     }),
     // legacy-migration start
-    vscode.commands.registerCommand("kilo-code.new.openMigrationWizard", () => {
+    vscode.commands.registerCommand("zhanlu.openMigrationWizard", () => {
       provider.postMessage({ type: "navigate", view: "migration" })
     }),
     // legacy-migration end
-    vscode.commands.registerCommand("kilo-code.new.openInTab", () => {
+    vscode.commands.registerCommand("zhanlu.openInTab", () => {
       return openKiloInNewTab(context, connectionService)
     }),
-    vscode.commands.registerCommand("kilo-code.new.showChanges", () => {
+    vscode.commands.registerCommand("zhanlu.showChanges", () => {
       diffViewerProvider.openPanel()
     }),
-    vscode.commands.registerCommand("kilo-code.new.openSubAgentViewer", (sessionID: string, title?: string) => {
+    vscode.commands.registerCommand("zhanlu.openSubAgentViewer", (sessionID: string, title?: string) => {
       subAgentViewerProvider.openPanel(sessionID, title)
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.previousSession", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.previousSession", () => {
       agentManagerProvider.postMessage({ type: "action", action: "sessionPrevious" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.nextSession", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.nextSession", () => {
       agentManagerProvider.postMessage({ type: "action", action: "sessionNext" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.previousTab", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.previousTab", () => {
       agentManagerProvider.postMessage({ type: "action", action: "tabPrevious" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.nextTab", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.nextTab", () => {
       agentManagerProvider.postMessage({ type: "action", action: "tabNext" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.showTerminal", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.showTerminal", () => {
       agentManagerProvider.showTerminalForCurrentSession()
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.toggleDiff", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.toggleDiff", () => {
       agentManagerProvider.postMessage({ type: "action", action: "toggleDiff" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.showShortcuts", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.showShortcuts", () => {
       agentManagerProvider.postMessage({ type: "action", action: "showShortcuts" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.focusPanel", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.focusPanel", () => {
       agentManagerProvider.focusPanel()
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.newTab", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.newTab", () => {
       agentManagerProvider.postMessage({ type: "action", action: "newTab" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.closeTab", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.closeTab", () => {
       agentManagerProvider.postMessage({ type: "action", action: "closeTab" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.newWorktree", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.newWorktree", () => {
       agentManagerProvider.postMessage({ type: "action", action: "newWorktree" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.openWorktree", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.openWorktree", () => {
       agentManagerProvider.postMessage({ type: "action", action: "openWorktree" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.closeWorktree", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.closeWorktree", () => {
       agentManagerProvider.postMessage({ type: "action", action: "closeWorktree" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.agentManager.advancedWorktree", () => {
+    vscode.commands.registerCommand("zhanlu.agentManager.advancedWorktree", () => {
       agentManagerProvider.postMessage({ type: "action", action: "advancedWorktree" })
     }),
     ...Array.from({ length: 9 }, (_, i) =>
-      vscode.commands.registerCommand(`kilo-code.new.agentManager.jumpTo${i + 1}`, () => {
+      vscode.commands.registerCommand(`zhanlu.agentManager.jumpTo${i + 1}`, () => {
         agentManagerProvider.postMessage({ type: "action", action: `jumpTo${i + 1}` })
       }),
     ),
   )
 
-  // Register URI handler for session imports (vscode://kilocode.kilo-code/kilocode/s/{sessionId})
+  // Register URI handler for session imports (vscode://ecloud.zhanlu/zhanlu/s/{sessionId})
   context.subscriptions.push(
     vscode.window.registerUriHandler({
       async handleUri(uri: vscode.Uri) {
@@ -219,15 +219,15 @@ async function openKiloInNewTab(context: vscode.ExtensionContext, connectionServ
 
   const targetCol = hasVisibleEditors ? Math.max(lastCol + 1, 1) : vscode.ViewColumn.Two
 
-  const panel = vscode.window.createWebviewPanel("kilo-code.new.TabPanel", EXTENSION_DISPLAY_NAME, targetCol, {
+  const panel = vscode.window.createWebviewPanel("zhanlu.TabPanel", EXTENSION_DISPLAY_NAME, targetCol, {
     enableScripts: true,
     retainContextWhenHidden: true,
     localResourceRoots: [context.extensionUri],
   })
 
   panel.iconPath = {
-    light: vscode.Uri.joinPath(context.extensionUri, "assets", "icons", "kilo-light.svg"),
-    dark: vscode.Uri.joinPath(context.extensionUri, "assets", "icons", "kilo-dark.svg"),
+    light: vscode.Uri.joinPath(context.extensionUri, "assets", "icons", "icon.svg"),
+    dark: vscode.Uri.joinPath(context.extensionUri, "assets", "icons", "icon.svg"),
   }
 
   const tabProvider = new KiloProvider(context.extensionUri, connectionService, context)
