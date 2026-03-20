@@ -30,6 +30,7 @@ const targets = [
   { target: "darwin-x64", cliDir: "@kilocode/cli-darwin-x64", binary: "zhanlu" },
   { target: "darwin-arm64", cliDir: "@kilocode/cli-darwin-arm64", binary: "zhanlu" },
   { target: "win32-x64", cliDir: "@kilocode/cli-windows-x64", binary: "zhanlu.exe" },
+  { target: "win32-arm64", cliDir: "@kilocode/cli-windows-arm64", binary: "zhanlu.exe" },
 ]
 
 const binDir = join(import.meta.dir, "..", "bin")

@@ -106,7 +106,7 @@ interface ApplyState {
   conflicts: AgentManagerApplyWorktreeDiffConflict[]
 }
 
-/** Sidebar selection: LOCAL for workspace, worktree ID for a worktree, or null for an unassigned session. */
+/** Sidebar selection: LOCAL for local repo, worktree ID for a worktree, or null for an unassigned session. */
 type SidebarSelection = typeof LOCAL | string | null
 
 const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.userAgent)
@@ -343,7 +343,7 @@ const AgentManagerContent: Component = () => {
   // Per-worktree git stats (diff additions/deletions, commits missing from origin)
   const [worktreeStats, setWorktreeStats] = createSignal<Record<string, WorktreeGitStats>>({})
 
-  // Local workspace git stats (branch name, diff additions/deletions, commits)
+  // Local repo git stats (branch name, diff additions/deletions, commits)
   const [localStats, setLocalStats] = createSignal<LocalGitStats | undefined>()
 
   // Per-worktree apply-to-local status
@@ -615,7 +615,9 @@ const AgentManagerContent: Component = () => {
 
   // Persist local session IDs and sidebar width to webview state for recovery (exclude pending tabs)
   createEffect(() => {
+    const prev = vscode.getState<Record<string, unknown>>() ?? {}
     vscode.setState({
+      ...prev,
       localSessionIDs: localSessionIDs().filter((id) => !isPending(id)),
       sidebarWidth: sidebarWidth(),
     })
@@ -1097,12 +1099,28 @@ const AgentManagerContent: Component = () => {
             )
             setSelection(ev.worktreeId)
           }
+          // Close diff/review panels — nothing to show during setup
+          setDiffOpen(false)
+          setReviewActive(false)
           setSetup({ active: true, message: ev.message, branch: ev.branch, worktreeId: ev.worktreeId })
         }
       }
 
       if (msg.type === "agentManager.sessionAdded") {
         const ev = msg as { type: string; sessionId: string; worktreeId: string }
+        session.selectSession(ev.sessionId)
+      }
+
+      if (msg.type === "agentManager.sessionForked") {
+        const ev = msg as { type: string; sessionId: string; forkedFromId: string; worktreeId?: string }
+        if (!ev.worktreeId) {
+          // Local session: insert new tab after the forked-from tab
+          setLocalSessionIDs((prev) => {
+            const idx = prev.indexOf(ev.forkedFromId)
+            if (idx >= 0) return [...prev.slice(0, idx + 1), ev.sessionId, ...prev.slice(idx + 1)]
+            return [...prev, ev.sessionId]
+          })
+        }
         session.selectSession(ev.sessionId)
       }
 
@@ -1193,12 +1211,13 @@ const AgentManagerContent: Component = () => {
       if ((msg as { type: string }).type === "agentManager.sendInitialMessage") {
         const ev = msg as unknown as AgentManagerSendInitialMessage
 
-        // Set model and agent selections for this session so the UI reflects them
-        if (ev.providerID && ev.modelID) {
-          session.setSessionModel(ev.sessionId, ev.providerID, ev.modelID)
-        }
+        // Set agent first so setSessionModel (and getSessionModel) resolve the
+        // correct agent — otherwise the session falls back to defaultAgent().
         if (ev.agent) {
           session.setSessionAgent(ev.sessionId, ev.agent)
+        }
+        if (ev.providerID && ev.modelID) {
+          session.setSessionModel(ev.sessionId, ev.providerID, ev.modelID)
         }
 
         // Only send a message if there's text — otherwise just clear busy state
@@ -1623,12 +1642,16 @@ const AgentManagerContent: Component = () => {
     ))
   }
 
+  const loaded = () => worktreesLoaded() && sessionsLoaded()
+
   const handleCreateWorktree = () => {
+    if (!loaded()) return
     vscode.postMessage({ type: "agentManager.createWorktree" })
   }
 
   // Advanced worktree dialog — opens a full dialog with prompt, versions, model, mode
   const showAdvancedWorktreeDialog = () => {
+    if (!loaded()) return
     dialog.show(() => <NewWorktreeDialog onClose={() => dialog.close()} defaultBaseBranch={repoDefaultBranch()} />)
   }
 
@@ -1713,6 +1736,7 @@ const AgentManagerContent: Component = () => {
 
   const handlePromote = (sessionId: string, e: MouseEvent) => {
     e.stopPropagation()
+    if (!loaded()) return
     vscode.postMessage({ type: "agentManager.promoteSession", sessionId })
   }
 
@@ -1725,8 +1749,16 @@ const AgentManagerContent: Component = () => {
     }
   }
 
-  const handleCloseTab = (sessionId: string, e: MouseEvent) => {
-    e.stopPropagation()
+  const handleForkSession = (sessionId: string) => {
+    const sel = selection()
+    if (sel === LOCAL) {
+      vscode.postMessage({ type: "agentManager.forkSession", sessionId })
+    } else if (sel) {
+      vscode.postMessage({ type: "agentManager.forkSession", sessionId, worktreeId: sel })
+    }
+  }
+
+  const handleCloseTab = (sessionId: string) => {
     const pending = isPending(sessionId)
     const isActive = pending ? sessionId === activePendingId() : session.currentSessionID() === sessionId
     if (isActive) {
@@ -1756,7 +1788,7 @@ const AgentManagerContent: Component = () => {
   const handleTabMouseDown = (sessionId: string, e: MouseEvent) => {
     if (e.button === 1) {
       e.preventDefault()
-      handleCloseTab(sessionId, e)
+      handleCloseTab(sessionId)
     }
   }
 
@@ -1854,8 +1886,7 @@ const AgentManagerContent: Component = () => {
         ? tabs.find((s) => s.id === pending)
         : undefined
     if (!target) return
-    const synthetic = new MouseEvent("click")
-    handleCloseTab(target.id, synthetic)
+    handleCloseTab(target.id)
   }
 
   // Cmd+T: add a new tab strictly to the current selection (no side effects)
@@ -1871,6 +1902,7 @@ const AgentManagerContent: Component = () => {
 
   // Cmd+N: if an unassigned session is selected, promote it; otherwise create a new worktree
   const handleNewWorktreeOrPromote = () => {
+    if (!loaded()) return
     const sel = selection()
     const sid = session.currentSessionID()
     if (sel === null && sid && !worktreeSessionIds().has(sid)) {
@@ -1897,7 +1929,7 @@ const AgentManagerContent: Component = () => {
           max={9999}
           onResize={(width) => setSidebarWidth(Math.min(width, window.innerWidth * MAX_SIDEBAR_WIDTH_RATIO))}
         />
-        {/* Local workspace item */}
+        {/* Local repo item */}
         <button
           class={`am-local-item ${selection() === LOCAL ? "am-local-item-active" : ""}`}
           data-sidebar-id="local"
@@ -1971,11 +2003,13 @@ const AgentManagerContent: Component = () => {
                     variant="ghost"
                     label={t("agentManager.worktree.new")}
                     onClick={handleCreateWorktree}
+                    disabled={!loaded()}
                   />
                   <DropdownMenu gutter={4} placement="bottom-end">
                     <DropdownMenu.Trigger
                       class="am-split-arrow"
                       aria-label={t("agentManager.worktree.advancedOptions")}
+                      disabled={!loaded()}
                     >
                       <Icon name="chevron-down" size="small" />
                     </DropdownMenu.Trigger>
@@ -2310,7 +2344,8 @@ const AgentManagerContent: Component = () => {
                               session.selectSession(s.id)
                             }}
                             onMiddleClick={(e: MouseEvent) => handleTabMouseDown(s.id, e)}
-                            onClose={(e: MouseEvent) => handleCloseTab(s.id, e)}
+                            onClose={() => handleCloseTab(s.id)}
+                            onFork={pending ? undefined : () => handleForkSession(s.id)}
                           />
                         )
                       }}
@@ -2529,6 +2564,7 @@ const AgentManagerContent: Component = () => {
                     variant="primary"
                     size="small"
                     onClick={() => {
+                      if (!loaded()) return
                       const sid = session.currentSessionID()
                       if (sid) vscode.postMessage({ type: "agentManager.promoteSession", sessionId: sid })
                     }}

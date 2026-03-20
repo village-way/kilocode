@@ -143,7 +143,6 @@ export type UserMessage = {
     openTabs?: Array<string>
     activeFile?: string
     shell?: string
-    timezone?: string
   }
 }
 
@@ -915,21 +914,6 @@ export type EventVcsBranchUpdated = {
   }
 }
 
-export type EventWorktreeReady = {
-  type: "worktree.ready"
-  properties: {
-    name: string
-    branch: string
-  }
-}
-
-export type EventWorktreeFailed = {
-  type: "worktree.failed"
-  properties: {
-    message: string
-  }
-}
-
 export type EventWorkspaceReady = {
   type: "workspace.ready"
   properties: {
@@ -983,6 +967,21 @@ export type EventPtyDeleted = {
   }
 }
 
+export type EventWorktreeReady = {
+  type: "worktree.ready"
+  properties: {
+    name: string
+    branch: string
+  }
+}
+
+export type EventWorktreeFailed = {
+  type: "worktree.failed"
+  properties: {
+    message: string
+  }
+}
+
 export type Event =
   | EventInstallationUpdated
   | EventInstallationUpdateAvailable
@@ -1023,14 +1022,14 @@ export type Event =
   | EventSessionTurnOpen
   | EventSessionTurnClose
   | EventVcsBranchUpdated
-  | EventWorktreeReady
-  | EventWorktreeFailed
   | EventWorkspaceReady
   | EventWorkspaceFailed
   | EventPtyCreated
   | EventPtyUpdated
   | EventPtyExited
   | EventPtyDeleted
+  | EventWorktreeReady
+  | EventWorktreeFailed
 
 export type GlobalEvent = {
   directory: string
@@ -1043,7 +1042,7 @@ export type GlobalEvent = {
 export type LogLevel = "DEBUG" | "INFO" | "WARN" | "ERROR"
 
 /**
- * Server configuration for opencode serve and web commands
+ * Server configuration for kilo serve and web commands
  */
 export type ServerConfig = {
   /**
@@ -1059,7 +1058,7 @@ export type ServerConfig = {
    */
   mdns?: boolean
   /**
-   * Custom domain name for mDNS service (default: opencode.local)
+   * Custom domain name for mDNS service (default: kilo.local)
    */
   mdnsDomain?: string
   /**
@@ -1214,6 +1213,7 @@ export type ProviderConfig = {
       }
       recommendedIndex?: number
       prompt?: "codex" | "gemini" | "beast" | "anthropic" | "trinity" | "anthropic_without_todo"
+      isFree?: boolean
       experimental?: boolean
       status?: "alpha" | "beta" | "deprecated"
       options?: {
@@ -1343,7 +1343,7 @@ export type Config = {
   logLevel?: LogLevel
   server?: ServerConfig
   /**
-   * Command configuration, see https://opencode.ai/docs/commands
+   * Command configuration, see https://kilo.ai/docs/commands
    */
   command?: {
     [key: string]: {
@@ -1417,7 +1417,7 @@ export type Config = {
     [key: string]: AgentConfig | undefined
   }
   /**
-   * Agent configuration, see https://opencode.ai/docs/agents
+   * Agent configuration, see https://kilo.ai/docs/agents
    */
   agent?: {
     plan?: AgentConfig
@@ -1515,6 +1515,10 @@ export type Config = {
      * Enable the batch tool
      */
     batch_tool?: boolean
+    /**
+     * Enable AI-powered codebase search
+     */
+    codebase_search?: boolean
     /**
      * Enable telemetry. Set to false to opt-out.
      */
@@ -1642,6 +1646,7 @@ export type Model = {
   }
   recommendedIndex?: number
   prompt?: "codex" | "gemini" | "beast" | "anthropic" | "trinity" | "anthropic_without_todo"
+  isFree?: boolean
 }
 
 export type Provider = {
@@ -1668,6 +1673,16 @@ export type ToolListItem = {
 
 export type ToolList = Array<ToolListItem>
 
+export type Workspace = {
+  id: string
+  type: string
+  branch: string | null
+  name: string | null
+  directory: string | null
+  extra: unknown | null
+  projectID: string
+}
+
 export type Worktree = {
   name: string
   branch: string
@@ -1680,16 +1695,6 @@ export type WorktreeCreateInput = {
    * Additional startup script to run after the project's start command
    */
   startCommand?: string
-}
-
-export type Workspace = {
-  id: string
-  branch: string | null
-  projectID: string
-  config: {
-    directory: string
-    type: "worktree"
-  }
 }
 
 export type WorktreeRemoveInput = {
@@ -2137,6 +2142,25 @@ export type ProjectCurrentResponses = {
 
 export type ProjectCurrentResponse = ProjectCurrentResponses[keyof ProjectCurrentResponses]
 
+export type ProjectInitGitData = {
+  body?: never
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/project/git/init"
+}
+
+export type ProjectInitGitResponses = {
+  /**
+   * Project information after git initialization
+   */
+  200: Project
+}
+
+export type ProjectInitGitResponse = ProjectInitGitResponses[keyof ProjectInitGitResponses]
+
 export type ProjectUpdateData = {
   body?: {
     name?: string
@@ -2494,6 +2518,93 @@ export type ToolListResponses = {
 
 export type ToolListResponse = ToolListResponses[keyof ToolListResponses]
 
+export type ExperimentalWorkspaceListData = {
+  body?: never
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/experimental/workspace"
+}
+
+export type ExperimentalWorkspaceListResponses = {
+  /**
+   * Workspaces
+   */
+  200: Array<Workspace>
+}
+
+export type ExperimentalWorkspaceListResponse =
+  ExperimentalWorkspaceListResponses[keyof ExperimentalWorkspaceListResponses]
+
+export type ExperimentalWorkspaceCreateData = {
+  body?: {
+    id?: string
+    type: string
+    branch: string | null
+    extra: unknown | null
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/experimental/workspace"
+}
+
+export type ExperimentalWorkspaceCreateErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type ExperimentalWorkspaceCreateError =
+  ExperimentalWorkspaceCreateErrors[keyof ExperimentalWorkspaceCreateErrors]
+
+export type ExperimentalWorkspaceCreateResponses = {
+  /**
+   * Workspace created
+   */
+  200: Workspace
+}
+
+export type ExperimentalWorkspaceCreateResponse =
+  ExperimentalWorkspaceCreateResponses[keyof ExperimentalWorkspaceCreateResponses]
+
+export type ExperimentalWorkspaceRemoveData = {
+  body?: never
+  path: {
+    id: string
+  }
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/experimental/workspace/{id}"
+}
+
+export type ExperimentalWorkspaceRemoveErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type ExperimentalWorkspaceRemoveError =
+  ExperimentalWorkspaceRemoveErrors[keyof ExperimentalWorkspaceRemoveErrors]
+
+export type ExperimentalWorkspaceRemoveResponses = {
+  /**
+   * Workspace removed
+   */
+  200: Workspace
+}
+
+export type ExperimentalWorkspaceRemoveResponse =
+  ExperimentalWorkspaceRemoveResponses[keyof ExperimentalWorkspaceRemoveResponses]
+
 export type WorktreeRemoveData = {
   body?: WorktreeRemoveInput
   path?: never
@@ -2568,96 +2679,6 @@ export type WorktreeCreateResponses = {
 }
 
 export type WorktreeCreateResponse = WorktreeCreateResponses[keyof WorktreeCreateResponses]
-
-export type ExperimentalWorkspaceRemoveData = {
-  body?: never
-  path: {
-    id: string
-  }
-  query?: {
-    directory?: string
-    workspace?: string
-  }
-  url: "/experimental/workspace/{id}"
-}
-
-export type ExperimentalWorkspaceRemoveErrors = {
-  /**
-   * Bad request
-   */
-  400: BadRequestError
-}
-
-export type ExperimentalWorkspaceRemoveError =
-  ExperimentalWorkspaceRemoveErrors[keyof ExperimentalWorkspaceRemoveErrors]
-
-export type ExperimentalWorkspaceRemoveResponses = {
-  /**
-   * Workspace removed
-   */
-  200: Workspace
-}
-
-export type ExperimentalWorkspaceRemoveResponse =
-  ExperimentalWorkspaceRemoveResponses[keyof ExperimentalWorkspaceRemoveResponses]
-
-export type ExperimentalWorkspaceCreateData = {
-  body?: {
-    branch: string | null
-    config: {
-      directory: string
-      type: "worktree"
-    }
-  }
-  path: {
-    id: string
-  }
-  query?: {
-    directory?: string
-    workspace?: string
-  }
-  url: "/experimental/workspace/{id}"
-}
-
-export type ExperimentalWorkspaceCreateErrors = {
-  /**
-   * Bad request
-   */
-  400: BadRequestError
-}
-
-export type ExperimentalWorkspaceCreateError =
-  ExperimentalWorkspaceCreateErrors[keyof ExperimentalWorkspaceCreateErrors]
-
-export type ExperimentalWorkspaceCreateResponses = {
-  /**
-   * Workspace created
-   */
-  200: Workspace
-}
-
-export type ExperimentalWorkspaceCreateResponse =
-  ExperimentalWorkspaceCreateResponses[keyof ExperimentalWorkspaceCreateResponses]
-
-export type ExperimentalWorkspaceListData = {
-  body?: never
-  path?: never
-  query?: {
-    directory?: string
-    workspace?: string
-  }
-  url: "/experimental/workspace"
-}
-
-export type ExperimentalWorkspaceListResponses = {
-  /**
-   * Workspaces
-   */
-  200: Array<Workspace>
-}
-
-export type ExperimentalWorkspaceListResponse =
-  ExperimentalWorkspaceListResponses[keyof ExperimentalWorkspaceListResponses]
 
 export type WorktreeResetData = {
   body?: WorktreeResetInput
@@ -3427,7 +3448,6 @@ export type SessionPromptData = {
       openTabs?: Array<string>
       activeFile?: string
       shell?: string
-      timezone?: string
     }
     parts: Array<TextPartInput | FilePartInput | AgentPartInput | SubtaskPartInput>
   }
@@ -3667,7 +3687,6 @@ export type SessionPromptAsyncData = {
       openTabs?: Array<string>
       activeFile?: string
       shell?: string
-      timezone?: string
     }
     parts: Array<TextPartInput | FilePartInput | AgentPartInput | SubtaskPartInput>
   }
@@ -3950,6 +3969,44 @@ export type PermissionReplyResponses = {
 
 export type PermissionReplyResponse = PermissionReplyResponses[keyof PermissionReplyResponses]
 
+export type PermissionSaveAlwaysRulesData = {
+  body?: {
+    approvedAlways?: Array<string>
+    deniedAlways?: Array<string>
+  }
+  path: {
+    requestID: string
+  }
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/permission/{requestID}/always-rules"
+}
+
+export type PermissionSaveAlwaysRulesErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+  /**
+   * Not found
+   */
+  404: NotFoundError
+}
+
+export type PermissionSaveAlwaysRulesError = PermissionSaveAlwaysRulesErrors[keyof PermissionSaveAlwaysRulesErrors]
+
+export type PermissionSaveAlwaysRulesResponses = {
+  /**
+   * Always rules saved successfully
+   */
+  200: boolean
+}
+
+export type PermissionSaveAlwaysRulesResponse =
+  PermissionSaveAlwaysRulesResponses[keyof PermissionSaveAlwaysRulesResponses]
+
 export type PermissionListData = {
   body?: never
   path?: never
@@ -4120,6 +4177,7 @@ export type ProviderListResponses = {
           }
           recommendedIndex?: number
           prompt?: "codex" | "gemini" | "beast" | "anthropic" | "trinity" | "anthropic_without_todo"
+          isFree?: boolean
           experimental?: boolean
           status?: "alpha" | "beta" | "deprecated"
           options: {
@@ -4366,6 +4424,66 @@ export type EnhancePromptEnhanceResponses = {
 }
 
 export type EnhancePromptEnhanceResponse = EnhancePromptEnhanceResponses[keyof EnhancePromptEnhanceResponses]
+
+export type KilocodeRemoveSkillData = {
+  body?: {
+    location: string
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/kilocode/skill/remove"
+}
+
+export type KilocodeRemoveSkillErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type KilocodeRemoveSkillError = KilocodeRemoveSkillErrors[keyof KilocodeRemoveSkillErrors]
+
+export type KilocodeRemoveSkillResponses = {
+  /**
+   * Skill removed
+   */
+  200: boolean
+}
+
+export type KilocodeRemoveSkillResponse = KilocodeRemoveSkillResponses[keyof KilocodeRemoveSkillResponses]
+
+export type KilocodeRemoveAgentData = {
+  body?: {
+    name: string
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/kilocode/agent/remove"
+}
+
+export type KilocodeRemoveAgentErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type KilocodeRemoveAgentError = KilocodeRemoveAgentErrors[keyof KilocodeRemoveAgentErrors]
+
+export type KilocodeRemoveAgentResponses = {
+  /**
+   * Agent removed
+   */
+  200: boolean
+}
+
+export type KilocodeRemoveAgentResponse = KilocodeRemoveAgentResponses[keyof KilocodeRemoveAgentResponses]
 
 export type KiloProfileData = {
   body?: never

@@ -4,12 +4,10 @@ export const dict = {
   "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Autocomplete",
   "kilocode:autocomplete.statusBar.snoozed": "pozastavené",
   "kilocode:autocomplete.statusBar.warning": "$(warning) Autocomplete",
-  "kilocode:autocomplete.statusBar.tooltip.basic": "湛卢自动补全",
-  "kilocode:autocomplete.statusBar.tooltip.disabled": "湛卢自动补全 (zakázané)",
-  "kilocode:autocomplete.statusBar.tooltip.noCredits":
-    "**Na tvojom účte nie sú žiadne kredity**\n\nTvoj účet 湛卢 nemá žiadne kredity. Pre použitie automatického doplňovania prosím pridaj kredity na svoj účet.\n\n[Otvoriť Nastavenia](command:zhanlu.settingsButtonClicked)",
+  "kilocode:autocomplete.statusBar.tooltip.basic": "Kilo Code Autocomplete",
+  "kilocode:autocomplete.statusBar.tooltip.disabled": "Kilo Code Autocomplete (zakázané)",
   "kilocode:autocomplete.statusBar.tooltip.noUsableProvider":
-    "**Nie je nakonfigurovaný žiadny model automatického doplňovania**\n\nPre povolenie automatického doplňovania pridaj profil s jedným z týchto podporovaných poskytovateľov: {{providers}}.\n\n[Otvoriť Nastavenia](command:zhanlu.settingsButtonClicked)",
+    "**Nie je nakonfigurovaný žiadny model automatického doplňovania**\n\nPre povolenie automatického doplňovania pridaj profil s jedným z týchto podporovaných poskytovateľov: {{providers}}.\n\n[Otvoriť Nastavenia]({{command}})",
   "kilocode:autocomplete.statusBar.tooltip.sessionTotal": "Celkové náklady relácie:",
   "kilocode:autocomplete.statusBar.tooltip.provider": "Poskytovateľ:",
   "kilocode:autocomplete.statusBar.tooltip.model": "Model:",

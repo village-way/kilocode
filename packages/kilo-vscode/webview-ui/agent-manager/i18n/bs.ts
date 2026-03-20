@@ -30,6 +30,7 @@ export const dict = {
   "agentManager.session.noSessions": "Nema otvorenih sesija",
   "agentManager.tab.close": "Zatvori",
   "agentManager.tab.closeTab": "Zatvori karticu",
+  "agentManager.tab.forkSession": "Razdvoji sesiju",
   "agentManager.tab.terminal": "Terminal",
   "agentManager.tab.openTerminal": "Otvori Terminal",
   "agentManager.setup.failed": "Postavljanje radnog prostora neuspješno",
@@ -82,10 +83,12 @@ export const dict = {
   "agentManager.dialog.versions": "Verzije",
   "agentManager.dialog.versionHint": "{{count}} worktree-ova će se pokrenuti paralelno",
   "agentManager.dialog.compareModels": "Uporedi modele",
+  "agentManager.dialog.compareModels.tooltip":
+    "Pokrenite agente na različitim modelima paralelno radi usporedbe rezultata",
   "agentManager.dialog.compareModels.searchModels": "Pretraži modele...",
   "agentManager.dialog.compareModels.selectModels": "Odaberi modele...",
   "agentManager.dialog.creating": "Kreiranje...",
-  "agentManager.dialog.createWorkspace": "Kreiraj worktree",
+  "agentManager.dialog.createWorktree": "Kreiraj worktree",
   "agentManager.dialog.removeImage": "Ukloni sliku",
   "agentManager.dialog.advanced": "Napredno...",
 

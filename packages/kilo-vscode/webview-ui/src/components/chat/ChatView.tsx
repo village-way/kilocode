@@ -76,10 +76,10 @@ export const ChatView: Component<ChatViewProps> = (props) => {
     onCleanup(() => document.removeEventListener("keydown", handler))
   })
 
-  const decide = (response: "once" | "always" | "reject") => {
+  const decide = (response: "once" | "always" | "reject", approvedAlways: string[], deniedAlways: string[]) => {
     const perm = permissionRequest()
     if (!perm || session.respondingPermissions().has(perm.id)) return
-    session.respondToPermission(perm.id, response)
+    session.respondToPermission(perm.id, response, approvedAlways, deniedAlways)
   }
 
   return (
@@ -134,7 +134,7 @@ export const ChatView: Component<ChatViewProps> = (props) => {
             </div>
           </Show>
           <Show when={!props.readonly}>
-            <PromptInput />
+            <PromptInput blocked={blocked} />
           </Show>
         </div>
       </Show>

@@ -57,6 +57,10 @@ import type {
   KiloCloudSessionImportResponses,
   KiloCloudSessionsErrors,
   KiloCloudSessionsResponses,
+  KilocodeRemoveAgentErrors,
+  KilocodeRemoveAgentResponses,
+  KilocodeRemoveSkillErrors,
+  KilocodeRemoveSkillResponses,
   KiloFimErrors,
   KiloFimResponses,
   KiloNotificationsErrors,
@@ -94,7 +98,10 @@ import type {
   PermissionRespondErrors,
   PermissionRespondResponses,
   PermissionRuleset,
+  PermissionSaveAlwaysRulesErrors,
+  PermissionSaveAlwaysRulesResponses,
   ProjectCurrentResponses,
+  ProjectInitGitResponses,
   ProjectListResponses,
   ProjectUpdateErrors,
   ProjectUpdateResponses,
@@ -257,7 +264,7 @@ export class Config extends HeyApiClient {
   /**
    * Get global configuration
    *
-   * Retrieve the current global OpenCode configuration settings and preferences.
+   * Retrieve the current global Kilo configuration settings and preferences.
    */
   public get<ThrowOnError extends boolean = false>(options?: Options<never, ThrowOnError>) {
     return (options?.client ?? this.client).get<GlobalConfigGetResponses, unknown, ThrowOnError>({
@@ -269,7 +276,7 @@ export class Config extends HeyApiClient {
   /**
    * Update global configuration
    *
-   * Update global OpenCode configuration settings and preferences.
+   * Update global Kilo configuration settings and preferences.
    */
   public update<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -295,7 +302,7 @@ export class Global extends HeyApiClient {
   /**
    * Get health
    *
-   * Get health information about the OpenCode server.
+   * Get health information about the Kilo server.
    */
   public health<ThrowOnError extends boolean = false>(options?: Options<never, ThrowOnError>) {
     return (options?.client ?? this.client).get<GlobalHealthResponses, unknown, ThrowOnError>({
@@ -307,7 +314,7 @@ export class Global extends HeyApiClient {
   /**
    * Get global events
    *
-   * Subscribe to global events from the OpenCode system using server-sent events.
+   * Subscribe to global events from the Kilo system using server-sent events.
    */
   public event<ThrowOnError extends boolean = false>(options?: Options<never, ThrowOnError>) {
     return (options?.client ?? this.client).sse.get<GlobalEventResponses, unknown, ThrowOnError>({
@@ -319,7 +326,7 @@ export class Global extends HeyApiClient {
   /**
    * Dispose instance
    *
-   * Clean up and dispose all OpenCode instances, releasing all resources.
+   * Clean up and dispose all Kilo instances, releasing all resources.
    */
   public dispose<ThrowOnError extends boolean = false>(options?: Options<never, ThrowOnError>) {
     return (options?.client ?? this.client).post<GlobalDisposeResponses, unknown, ThrowOnError>({
@@ -394,7 +401,7 @@ export class Project extends HeyApiClient {
   /**
    * List all projects
    *
-   * Get a list of projects that have been opened with OpenCode.
+   * Get a list of projects that have been opened with Kilo.
    */
   public list<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -424,7 +431,7 @@ export class Project extends HeyApiClient {
   /**
    * Get current project
    *
-   * Retrieve the currently active project that OpenCode is working with.
+   * Retrieve the currently active project that Kilo is working with.
    */
   public current<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -446,6 +453,36 @@ export class Project extends HeyApiClient {
     )
     return (options?.client ?? this.client).get<ProjectCurrentResponses, unknown, ThrowOnError>({
       url: "/project/current",
+      ...options,
+      ...params,
+    })
+  }
+
+  /**
+   * Initialize git repository
+   *
+   * Create a git repository for the current project and return the refreshed project info.
+   */
+  public initGit<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<ProjectInitGitResponses, unknown, ThrowOnError>({
+      url: "/project/git/init",
       ...options,
       ...params,
     })
@@ -508,7 +545,7 @@ export class Pty extends HeyApiClient {
   /**
    * List PTY sessions
    *
-   * Get a list of all active pseudo-terminal (PTY) sessions managed by OpenCode.
+   * Get a list of all active pseudo-terminal (PTY) sessions managed by Kilo.
    */
   public list<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -727,7 +764,7 @@ export class Config2 extends HeyApiClient {
   /**
    * Get configuration
    *
-   * Retrieve the current OpenCode configuration settings and preferences.
+   * Retrieve the current Kilo configuration settings and preferences.
    */
   public get<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -757,7 +794,7 @@ export class Config2 extends HeyApiClient {
   /**
    * Update configuration
    *
-   * Update OpenCode configuration settings and preferences.
+   * Update Kilo configuration settings and preferences.
    */
   public update<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -885,6 +922,214 @@ export class Tool extends HeyApiClient {
       ...options,
       ...params,
     })
+  }
+}
+
+export class Workspace extends HeyApiClient {
+  /**
+   * List workspaces
+   *
+   * List all workspaces.
+   */
+  public list<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).get<ExperimentalWorkspaceListResponses, unknown, ThrowOnError>({
+      url: "/experimental/workspace",
+      ...options,
+      ...params,
+    })
+  }
+
+  /**
+   * Create workspace
+   *
+   * Create a workspace for the current project.
+   */
+  public create<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+      id?: string
+      type?: string
+      branch?: string | null
+      extra?: unknown | null
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+            { in: "body", key: "id" },
+            { in: "body", key: "type" },
+            { in: "body", key: "branch" },
+            { in: "body", key: "extra" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<
+      ExperimentalWorkspaceCreateResponses,
+      ExperimentalWorkspaceCreateErrors,
+      ThrowOnError
+    >({
+      url: "/experimental/workspace",
+      ...options,
+      ...params,
+      headers: {
+        "Content-Type": "application/json",
+        ...options?.headers,
+        ...params.headers,
+      },
+    })
+  }
+
+  /**
+   * Remove workspace
+   *
+   * Remove an existing workspace.
+   */
+  public remove<ThrowOnError extends boolean = false>(
+    parameters: {
+      id: string
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "path", key: "id" },
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).delete<
+      ExperimentalWorkspaceRemoveResponses,
+      ExperimentalWorkspaceRemoveErrors,
+      ThrowOnError
+    >({
+      url: "/experimental/workspace/{id}",
+      ...options,
+      ...params,
+    })
+  }
+}
+
+export class Session extends HeyApiClient {
+  /**
+   * List sessions
+   *
+   * Get a list of all Kilo sessions across projects, sorted by most recently updated. Archived sessions are excluded by default.
+   */
+  public list<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+      roots?: boolean
+      start?: number
+      cursor?: number
+      search?: string
+      limit?: number
+      archived?: boolean
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+            { in: "query", key: "roots" },
+            { in: "query", key: "start" },
+            { in: "query", key: "cursor" },
+            { in: "query", key: "search" },
+            { in: "query", key: "limit" },
+            { in: "query", key: "archived" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).get<ExperimentalSessionListResponses, unknown, ThrowOnError>({
+      url: "/experimental/session",
+      ...options,
+      ...params,
+    })
+  }
+}
+
+export class Resource extends HeyApiClient {
+  /**
+   * Get MCP resources
+   *
+   * Get all available MCP resources from connected servers. Optionally filter by name.
+   */
+  public list<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).get<ExperimentalResourceListResponses, unknown, ThrowOnError>({
+      url: "/experimental/resource",
+      ...options,
+      ...params,
+    })
+  }
+}
+
+export class Experimental extends HeyApiClient {
+  private _workspace?: Workspace
+  get workspace(): Workspace {
+    return (this._workspace ??= new Workspace({ client: this.client }))
+  }
+
+  private _session?: Session
+  get session(): Session {
+    return (this._session ??= new Session({ client: this.client }))
+  }
+
+  private _resource?: Resource
+  get resource(): Resource {
+    return (this._resource ??= new Resource({ client: this.client }))
   }
 }
 
@@ -1129,220 +1374,11 @@ export class Worktree extends HeyApiClient {
   }
 }
 
-export class Workspace extends HeyApiClient {
-  /**
-   * Remove workspace
-   *
-   * Remove an existing workspace.
-   */
-  public remove<ThrowOnError extends boolean = false>(
-    parameters: {
-      id: string
-      directory?: string
-      workspace?: string
-    },
-    options?: Options<never, ThrowOnError>,
-  ) {
-    const params = buildClientParams(
-      [parameters],
-      [
-        {
-          args: [
-            { in: "path", key: "id" },
-            { in: "query", key: "directory" },
-            { in: "query", key: "workspace" },
-          ],
-        },
-      ],
-    )
-    return (options?.client ?? this.client).delete<
-      ExperimentalWorkspaceRemoveResponses,
-      ExperimentalWorkspaceRemoveErrors,
-      ThrowOnError
-    >({
-      url: "/experimental/workspace/{id}",
-      ...options,
-      ...params,
-    })
-  }
-
-  /**
-   * Create workspace
-   *
-   * Create a workspace for the current project.
-   */
-  public create<ThrowOnError extends boolean = false>(
-    parameters: {
-      id: string
-      directory?: string
-      workspace?: string
-      branch?: string | null
-      config?: {
-        directory: string
-        type: "worktree"
-      }
-    },
-    options?: Options<never, ThrowOnError>,
-  ) {
-    const params = buildClientParams(
-      [parameters],
-      [
-        {
-          args: [
-            { in: "path", key: "id" },
-            { in: "query", key: "directory" },
-            { in: "query", key: "workspace" },
-            { in: "body", key: "branch" },
-            { in: "body", key: "config" },
-          ],
-        },
-      ],
-    )
-    return (options?.client ?? this.client).post<
-      ExperimentalWorkspaceCreateResponses,
-      ExperimentalWorkspaceCreateErrors,
-      ThrowOnError
-    >({
-      url: "/experimental/workspace/{id}",
-      ...options,
-      ...params,
-      headers: {
-        "Content-Type": "application/json",
-        ...options?.headers,
-        ...params.headers,
-      },
-    })
-  }
-
-  /**
-   * List workspaces
-   *
-   * List all workspaces.
-   */
-  public list<ThrowOnError extends boolean = false>(
-    parameters?: {
-      directory?: string
-      workspace?: string
-    },
-    options?: Options<never, ThrowOnError>,
-  ) {
-    const params = buildClientParams(
-      [parameters],
-      [
-        {
-          args: [
-            { in: "query", key: "directory" },
-            { in: "query", key: "workspace" },
-          ],
-        },
-      ],
-    )
-    return (options?.client ?? this.client).get<ExperimentalWorkspaceListResponses, unknown, ThrowOnError>({
-      url: "/experimental/workspace",
-      ...options,
-      ...params,
-    })
-  }
-}
-
-export class Session extends HeyApiClient {
-  /**
-   * List sessions
-   *
-   * Get a list of all OpenCode sessions across projects, sorted by most recently updated. Archived sessions are excluded by default.
-   */
-  public list<ThrowOnError extends boolean = false>(
-    parameters?: {
-      directory?: string
-      workspace?: string
-      roots?: boolean
-      start?: number
-      cursor?: number
-      search?: string
-      limit?: number
-      archived?: boolean
-    },
-    options?: Options<never, ThrowOnError>,
-  ) {
-    const params = buildClientParams(
-      [parameters],
-      [
-        {
-          args: [
-            { in: "query", key: "directory" },
-            { in: "query", key: "workspace" },
-            { in: "query", key: "roots" },
-            { in: "query", key: "start" },
-            { in: "query", key: "cursor" },
-            { in: "query", key: "search" },
-            { in: "query", key: "limit" },
-            { in: "query", key: "archived" },
-          ],
-        },
-      ],
-    )
-    return (options?.client ?? this.client).get<ExperimentalSessionListResponses, unknown, ThrowOnError>({
-      url: "/experimental/session",
-      ...options,
-      ...params,
-    })
-  }
-}
-
-export class Resource extends HeyApiClient {
-  /**
-   * Get MCP resources
-   *
-   * Get all available MCP resources from connected servers. Optionally filter by name.
-   */
-  public list<ThrowOnError extends boolean = false>(
-    parameters?: {
-      directory?: string
-      workspace?: string
-    },
-    options?: Options<never, ThrowOnError>,
-  ) {
-    const params = buildClientParams(
-      [parameters],
-      [
-        {
-          args: [
-            { in: "query", key: "directory" },
-            { in: "query", key: "workspace" },
-          ],
-        },
-      ],
-    )
-    return (options?.client ?? this.client).get<ExperimentalResourceListResponses, unknown, ThrowOnError>({
-      url: "/experimental/resource",
-      ...options,
-      ...params,
-    })
-  }
-}
-
-export class Experimental extends HeyApiClient {
-  private _workspace?: Workspace
-  get workspace(): Workspace {
-    return (this._workspace ??= new Workspace({ client: this.client }))
-  }
-
-  private _session?: Session
-  get session(): Session {
-    return (this._session ??= new Session({ client: this.client }))
-  }
-
-  private _resource?: Resource
-  get resource(): Resource {
-    return (this._resource ??= new Resource({ client: this.client }))
-  }
-}
-
 export class Session2 extends HeyApiClient {
   /**
    * List sessions
    *
-   * Get a list of all OpenCode sessions, sorted by most recently updated.
+   * Get a list of all Kilo sessions, sorted by most recently updated.
    */
   public list<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -1380,7 +1416,7 @@ export class Session2 extends HeyApiClient {
   /**
    * Create session
    *
-   * Create a new OpenCode session for interacting with AI assistants and managing conversations.
+   * Create a new Kilo session for interacting with AI assistants and managing conversations.
    */
   public create<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -1485,7 +1521,7 @@ export class Session2 extends HeyApiClient {
   /**
    * Get session
    *
-   * Retrieve detailed information about a specific OpenCode session.
+   * Retrieve detailed information about a specific Kilo session.
    */
   public get<ThrowOnError extends boolean = false>(
     parameters: {
@@ -1938,7 +1974,6 @@ export class Session2 extends HeyApiClient {
         openTabs?: Array<string>
         activeFile?: string
         shell?: string
-        timezone?: string
       }
       parts?: Array<TextPartInput | FilePartInput | AgentPartInput | SubtaskPartInput>
     },
@@ -2078,7 +2113,6 @@ export class Session2 extends HeyApiClient {
         openTabs?: Array<string>
         activeFile?: string
         shell?: string
-        timezone?: string
       }
       parts?: Array<TextPartInput | FilePartInput | AgentPartInput | SubtaskPartInput>
     },
@@ -2448,6 +2482,51 @@ export class Permission extends HeyApiClient {
     )
     return (options?.client ?? this.client).post<PermissionReplyResponses, PermissionReplyErrors, ThrowOnError>({
       url: "/permission/{requestID}/reply",
+      ...options,
+      ...params,
+      headers: {
+        "Content-Type": "application/json",
+        ...options?.headers,
+        ...params.headers,
+      },
+    })
+  }
+
+  /**
+   * Save always-allow/deny permission rules
+   *
+   * Save approved/denied always-rules for a pending permission request.
+   */
+  public saveAlwaysRules<ThrowOnError extends boolean = false>(
+    parameters: {
+      requestID: string
+      directory?: string
+      workspace?: string
+      approvedAlways?: Array<string>
+      deniedAlways?: Array<string>
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "path", key: "requestID" },
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+            { in: "body", key: "approvedAlways" },
+            { in: "body", key: "deniedAlways" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<
+      PermissionSaveAlwaysRulesResponses,
+      PermissionSaveAlwaysRulesErrors,
+      ThrowOnError
+    >({
+      url: "/permission/{requestID}/always-rules",
       ...options,
       ...params,
       headers: {
@@ -2879,6 +2958,86 @@ export class EnhancePrompt extends HeyApiClient {
         ...params.headers,
       },
     })
+  }
+}
+
+export class Kilocode extends HeyApiClient {
+  /**
+   * Remove a skill
+   *
+   * Remove a skill by deleting its directory from disk and clearing it from cache.
+   */
+  public removeSkill<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+      location?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+            { in: "body", key: "location" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<KilocodeRemoveSkillResponses, KilocodeRemoveSkillErrors, ThrowOnError>(
+      {
+        url: "/kilocode/skill/remove",
+        ...options,
+        ...params,
+        headers: {
+          "Content-Type": "application/json",
+          ...options?.headers,
+          ...params.headers,
+        },
+      },
+    )
+  }
+
+  /**
+   * Remove a custom agent
+   *
+   * Remove a custom (non-native) agent by deleting its markdown file from disk and refreshing state.
+   */
+  public removeAgent<ThrowOnError extends boolean = false>(
+    parameters?: {
+      directory?: string
+      workspace?: string
+      name?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+            { in: "body", key: "name" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<KilocodeRemoveAgentResponses, KilocodeRemoveAgentErrors, ThrowOnError>(
+      {
+        url: "/kilocode/agent/remove",
+        ...options,
+        ...params,
+        headers: {
+          "Content-Type": "application/json",
+          ...options?.headers,
+          ...params.headers,
+        },
+      },
+    )
   }
 }
 
@@ -4084,7 +4243,7 @@ export class Instance extends HeyApiClient {
   /**
    * Dispose instance
    *
-   * Clean up and dispose the current OpenCode instance, releasing all resources.
+   * Clean up and dispose the current Kilo instance, releasing all resources.
    */
   public dispose<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -4116,7 +4275,7 @@ export class Path extends HeyApiClient {
   /**
    * Get paths
    *
-   * Retrieve the current working directory and related path information for the OpenCode instance.
+   * Retrieve the current working directory and related path information for the Kilo instance.
    */
   public get<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -4180,7 +4339,7 @@ export class Command extends HeyApiClient {
   /**
    * List commands
    *
-   * Get a list of all available commands in the OpenCode system.
+   * Get a list of all available commands in the Kilo system.
    */
   public list<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -4257,7 +4416,7 @@ export class App extends HeyApiClient {
   /**
    * List agents
    *
-   * Get a list of all available AI agents in the OpenCode system.
+   * Get a list of all available AI agents in the Kilo system.
    */
   public agents<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -4287,7 +4446,7 @@ export class App extends HeyApiClient {
   /**
    * List skills
    *
-   * Get a list of all available skills in the OpenCode system.
+   * Get a list of all available skills in the Kilo system.
    */
   public skills<ThrowOnError extends boolean = false>(
     parameters?: {
@@ -4449,14 +4608,14 @@ export class KiloClient extends HeyApiClient {
     return (this._tool ??= new Tool({ client: this.client }))
   }
 
-  private _worktree?: Worktree
-  get worktree(): Worktree {
-    return (this._worktree ??= new Worktree({ client: this.client }))
-  }
-
   private _experimental?: Experimental
   get experimental(): Experimental {
     return (this._experimental ??= new Experimental({ client: this.client }))
+  }
+
+  private _worktree?: Worktree
+  get worktree(): Worktree {
+    return (this._worktree ??= new Worktree({ client: this.client }))
   }
 
   private _session?: Session2
@@ -4497,6 +4656,11 @@ export class KiloClient extends HeyApiClient {
   private _enhancePrompt?: EnhancePrompt
   get enhancePrompt(): EnhancePrompt {
     return (this._enhancePrompt ??= new EnhancePrompt({ client: this.client }))
+  }
+
+  private _kilocode?: Kilocode
+  get kilocode(): Kilocode {
+    return (this._kilocode ??= new Kilocode({ client: this.client }))
   }
 
   private _kilo?: Kilo

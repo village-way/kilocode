@@ -2,7 +2,7 @@
   "name": "zhanlu",
   "displayName": "%extension.displayName%",
   "description": "%extension.description%",
-  "version": "7.0.47",
+  "version": "7.0.51",
   "icon": "assets/icons/icon.png",
   "galleryBanner": {
     "color": "#617A91",
@@ -725,6 +725,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "knip": "knip",
+    "check-kilocode-change": "! grep -rn 'kilocode_change' . ../kilo-ui/ --exclude='package.json' --exclude='*.md' --exclude-dir='node_modules' --exclude-dir='dist' | grep -v '`kilocode_change`'",
     "lint": "eslint src webview-ui",
     "test": "vscode-test",
     "test:unit": "bun test tests/unit/",
@@ -732,7 +733,9 @@
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build -o storybook-static",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "snapshot:build": "bun script/dev-snapshot.ts build",
+    "snapshot:install": "bun script/dev-snapshot.ts install"
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",
@@ -770,6 +773,7 @@
     "diff": "^7.0.0",
     "dotenv": "^16.4.7",
     "fastest-levenshtein": "^1.0.16",
+    "friendly-words": "1.3.1",
     "ignore": "^7.0.3",
     "js-tiktoken": "^1.0.18",
     "lru-cache": "^11.0.2",
@@ -779,6 +783,7 @@
     "solid-js": "^1.9.11",
     "uri-js": "^4.4.1",
     "web-tree-sitter": "^0.24.7",
+    "yaml": "2.8.2",
     "zod": "^3.24.2"
   }
 }

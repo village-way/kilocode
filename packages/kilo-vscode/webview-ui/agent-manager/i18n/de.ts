@@ -30,6 +30,7 @@ export const dict = {
   "agentManager.session.noSessions": "Keine Sitzungen geöffnet",
   "agentManager.tab.close": "Schließen",
   "agentManager.tab.closeTab": "Tab schließen",
+  "agentManager.tab.forkSession": "Sitzung verzweigen",
   "agentManager.tab.terminal": "Terminal",
   "agentManager.tab.openTerminal": "Terminal öffnen",
   "agentManager.setup.failed": "Einrichtung des Arbeitsbereichs fehlgeschlagen",
@@ -82,10 +83,12 @@ export const dict = {
   "agentManager.dialog.versions": "Versionen",
   "agentManager.dialog.versionHint": "{{count}} Worktrees werden parallel ausgeführt",
   "agentManager.dialog.compareModels": "Modelle vergleichen",
+  "agentManager.dialog.compareModels.tooltip":
+    "Agenten parallel auf verschiedenen Modellen ausführen, um Ergebnisse zu vergleichen",
   "agentManager.dialog.compareModels.searchModels": "Modelle suchen...",
   "agentManager.dialog.compareModels.selectModels": "Modelle auswählen...",
   "agentManager.dialog.creating": "Wird erstellt...",
-  "agentManager.dialog.createWorkspace": "Worktree erstellen",
+  "agentManager.dialog.createWorktree": "Worktree erstellen",
   "agentManager.dialog.removeImage": "Bild entfernen",
   "agentManager.dialog.advanced": "Erweitert...",
 

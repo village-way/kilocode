@@ -4,12 +4,10 @@ export const dict = {
   "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Autocomplete",
   "kilocode:autocomplete.statusBar.snoozed": "متوقف مؤقتاً",
   "kilocode:autocomplete.statusBar.warning": "$(warning) Autocomplete",
-  "kilocode:autocomplete.statusBar.tooltip.basic": "湛卢自动补全",
-  "kilocode:autocomplete.statusBar.tooltip.disabled": "湛卢自动补全 (معطل)",
-  "kilocode:autocomplete.statusBar.tooltip.noCredits":
-    "**لا يوجد رصيد في حسابك**\n\nحساب 湛卢 الخاص بك لا يحتوي على رصيد. لاستخدام الإكمال التلقائي، يرجى إضافة رصيد إلى حسابك.\n\n[فتح الإعدادات](command:zhanlu.settingsButtonClicked)",
+  "kilocode:autocomplete.statusBar.tooltip.basic": "Kilo Code Autocomplete",
+  "kilocode:autocomplete.statusBar.tooltip.disabled": "Kilo Code Autocomplete (معطل)",
   "kilocode:autocomplete.statusBar.tooltip.noUsableProvider":
-    "**لم يتم تكوين نموذج الإكمال التلقائي**\n\nلتمكين الإكمال التلقائي، أضف ملفًا شخصيًا مع أحد هذه المزودين المدعومين: {{providers}}.\n\n[فتح الإعدادات](command:zhanlu.settingsButtonClicked)",
+    "**لم يتم تكوين نموذج الإكمال التلقائي**\n\nلتمكين الإكمال التلقائي، أضف ملفًا شخصيًا مع أحد هذه المزودين المدعومين: {{providers}}.\n\n[فتح الإعدادات]({{command}})",
   "kilocode:autocomplete.statusBar.tooltip.sessionTotal": "إجمالي تكلفة الجلسة:",
   "kilocode:autocomplete.statusBar.tooltip.provider": "المزود:",
   "kilocode:autocomplete.statusBar.tooltip.model": "النموذج:",

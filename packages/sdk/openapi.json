@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.1",
   "info": {
-    "title": "opencode",
-    "description": "opencode api",
+    "title": "kilo",
+    "description": "kilo api",
     "version": "1.0.0"
   },
   "paths": {
@@ -10,7 +10,7 @@
       "get": {
         "operationId": "global.health",
         "summary": "Get health",
-        "description": "Get health information about the OpenCode server.",
+        "description": "Get health information about the Kilo server.",
         "responses": {
           "200": {
             "description": "Health information",
@@ -45,7 +45,7 @@
       "get": {
         "operationId": "global.event",
         "summary": "Get global events",
-        "description": "Subscribe to global events from the OpenCode system using server-sent events.",
+        "description": "Subscribe to global events from the Kilo system using server-sent events.",
         "responses": {
           "200": {
             "description": "Event stream",
@@ -70,7 +70,7 @@
       "get": {
         "operationId": "global.config.get",
         "summary": "Get global configuration",
-        "description": "Retrieve the current global OpenCode configuration settings and preferences.",
+        "description": "Retrieve the current global Kilo configuration settings and preferences.",
         "responses": {
           "200": {
             "description": "Get global config info",
@@ -93,7 +93,7 @@
       "patch": {
         "operationId": "global.config.update",
         "summary": "Update global configuration",
-        "description": "Update global OpenCode configuration settings and preferences.",
+        "description": "Update global Kilo configuration settings and preferences.",
         "responses": {
           "200": {
             "description": "Successfully updated global config",
@@ -137,7 +137,7 @@
       "post": {
         "operationId": "global.dispose",
         "summary": "Dispose instance",
-        "description": "Clean up and dispose all OpenCode instances, releasing all resources.",
+        "description": "Clean up and dispose all Kilo instances, releasing all resources.",
         "responses": {
           "200": {
             "description": "Global disposed",
@@ -275,7 +275,7 @@
           }
         ],
         "summary": "List all projects",
-        "description": "Get a list of projects that have been opened with OpenCode.",
+        "description": "Get a list of projects that have been opened with Kilo.",
         "responses": {
           "200": {
             "description": "List of projects",
@@ -319,7 +319,7 @@
           }
         ],
         "summary": "Get current project",
-        "description": "Retrieve the currently active project that OpenCode is working with.",
+        "description": "Retrieve the currently active project that Kilo is working with.",
         "responses": {
           "200": {
             "description": "Current project information",
@@ -336,6 +336,47 @@
           {
             "lang": "js",
             "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.project.current({\n  ...\n})"
+          }
+        ]
+      }
+    },
+    "/project/git/init": {
+      "post": {
+        "operationId": "project.initGit",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Initialize git repository",
+        "description": "Create a git repository for the current project and return the refreshed project info.",
+        "responses": {
+          "200": {
+            "description": "Project information after git initialization",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createOpencodeClient } from \"@opencode-ai/sdk\n\nconst client = createOpencodeClient()\nawait client.project.initGit({\n  ...\n})"
           }
         ]
       }
@@ -466,7 +507,7 @@
           }
         ],
         "summary": "List PTY sessions",
-        "description": "Get a list of all active pseudo-terminal (PTY) sessions managed by OpenCode.",
+        "description": "Get a list of all active pseudo-terminal (PTY) sessions managed by Kilo.",
         "responses": {
           "200": {
             "description": "List of sessions",
@@ -852,7 +893,7 @@
           }
         ],
         "summary": "Get configuration",
-        "description": "Retrieve the current OpenCode configuration settings and preferences.",
+        "description": "Retrieve the current Kilo configuration settings and preferences.",
         "responses": {
           "200": {
             "description": "Get config info",
@@ -891,7 +932,7 @@
           }
         ],
         "summary": "Update configuration",
-        "description": "Update OpenCode configuration settings and preferences.",
+        "description": "Update Kilo configuration settings and preferences.",
         "responses": {
           "200": {
             "description": "Successfully updated config",
@@ -1108,6 +1149,196 @@
         ]
       }
     },
+    "/experimental/workspace": {
+      "post": {
+        "operationId": "experimental.workspace.create",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Create workspace",
+        "description": "Create a workspace for the current project.",
+        "responses": {
+          "200": {
+            "description": "Workspace created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^wrk.*"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "branch": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "extra": {
+                    "anyOf": [
+                      {},
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": ["type", "branch", "extra"]
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.create({\n  ...\n})"
+          }
+        ]
+      },
+      "get": {
+        "operationId": "experimental.workspace.list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "List workspaces",
+        "description": "List all workspaces.",
+        "responses": {
+          "200": {
+            "description": "Workspaces",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workspace"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.list({\n  ...\n})"
+          }
+        ]
+      }
+    },
+    "/experimental/workspace/{id}": {
+      "delete": {
+        "operationId": "experimental.workspace.remove",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "pattern": "^wrk.*"
+            },
+            "required": true
+          }
+        ],
+        "summary": "Remove workspace",
+        "description": "Remove an existing workspace.",
+        "responses": {
+          "200": {
+            "description": "Workspace removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.remove({\n  ...\n})"
+          }
+        ]
+      }
+    },
     "/experimental/worktree": {
       "post": {
         "operationId": "worktree.create",
@@ -1268,207 +1499,6 @@
         ]
       }
     },
-    "/experimental/workspace/{id}": {
-      "post": {
-        "operationId": "experimental.workspace.create",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "directory",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "workspace",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "schema": {
-              "type": "string",
-              "pattern": "^wrk.*"
-            },
-            "required": true
-          }
-        ],
-        "summary": "Create workspace",
-        "description": "Create a workspace for the current project.",
-        "responses": {
-          "200": {
-            "description": "Workspace created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Workspace"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "branch": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "config": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "directory": {
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string",
-                            "const": "worktree"
-                          }
-                        },
-                        "required": ["directory", "type"]
-                      }
-                    ]
-                  }
-                },
-                "required": ["branch", "config"]
-              }
-            }
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.create({\n  ...\n})"
-          }
-        ]
-      },
-      "delete": {
-        "operationId": "experimental.workspace.remove",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "directory",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "workspace",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "schema": {
-              "type": "string",
-              "pattern": "^wrk.*"
-            },
-            "required": true
-          }
-        ],
-        "summary": "Remove workspace",
-        "description": "Remove an existing workspace.",
-        "responses": {
-          "200": {
-            "description": "Workspace removed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Workspace"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestError"
-                }
-              }
-            }
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.remove({\n  ...\n})"
-          }
-        ]
-      }
-    },
-    "/experimental/workspace": {
-      "get": {
-        "operationId": "experimental.workspace.list",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "directory",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "workspace",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "summary": "List workspaces",
-        "description": "List all workspaces.",
-        "responses": {
-          "200": {
-            "description": "Workspaces",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Workspace"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.experimental.workspace.list({\n  ...\n})"
-          }
-        ]
-      }
-    },
     "/experimental/worktree/reset": {
       "post": {
         "operationId": "worktree.reset",
@@ -1524,7 +1554,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.worktree.reset({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.worktree.reset({\n  ...\n})"
           }
         ]
       }
@@ -1536,6 +1566,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -1579,7 +1616,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.worktree.diff({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.worktree.diff({\n  ...\n})"
           }
         ]
       }
@@ -1591,6 +1628,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -1634,7 +1678,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.worktree.diffSummary({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.worktree.diffSummary({\n  ...\n})"
           }
         ]
       }
@@ -1646,6 +1690,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -1702,7 +1753,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.worktree.diffFile({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.worktree.diffFile({\n  ...\n})"
           }
         ]
       }
@@ -1776,7 +1827,7 @@
           }
         ],
         "summary": "List sessions",
-        "description": "Get a list of all OpenCode sessions across projects, sorted by most recently updated. Archived sessions are excluded by default.",
+        "description": "Get a list of all Kilo sessions across projects, sorted by most recently updated. Archived sessions are excluded by default.",
         "responses": {
           "200": {
             "description": "List of sessions",
@@ -1900,7 +1951,7 @@
           }
         ],
         "summary": "List sessions",
-        "description": "Get a list of all OpenCode sessions, sorted by most recently updated.",
+        "description": "Get a list of all Kilo sessions, sorted by most recently updated.",
         "responses": {
           "200": {
             "description": "List of sessions",
@@ -1942,7 +1993,7 @@
           }
         ],
         "summary": "Create session",
-        "description": "Create a new OpenCode session for interacting with AI assistants and managing conversations.",
+        "description": "Create a new Kilo session for interacting with AI assistants and managing conversations.",
         "responses": {
           "200": {
             "description": "Successfully created session",
@@ -2083,7 +2134,7 @@
           }
         ],
         "summary": "Get session",
-        "description": "Retrieve detailed information about a specific OpenCode session.",
+        "description": "Retrieve detailed information about a specific Kilo session.",
         "tags": ["Session"],
         "responses": {
           "200": {
@@ -3176,9 +3227,6 @@
                       },
                       "shell": {
                         "type": "string"
-                      },
-                      "timezone": {
-                        "type": "string"
                       }
                     }
                   },
@@ -3685,9 +3733,6 @@
                         "type": "string"
                       },
                       "shell": {
-                        "type": "string"
-                      },
-                      "timezone": {
                         "type": "string"
                       }
                     }
@@ -4310,6 +4355,98 @@
         ]
       }
     },
+    "/permission/{requestID}/always-rules": {
+      "post": {
+        "operationId": "permission.saveAlwaysRules",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "requestID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "summary": "Save always-allow/deny permission rules",
+        "description": "Save approved/denied always-rules for a pending permission request.",
+        "responses": {
+          "200": {
+            "description": "Always rules saved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "approvedAlways": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "deniedAlways": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.permission.saveAlwaysRules({\n  ...\n})"
+          }
+        ]
+      }
+    },
     "/permission": {
       "get": {
         "operationId": "permission.list",
@@ -4736,6 +4873,9 @@
                                   "type": "string",
                                   "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
                                 },
+                                "isFree": {
+                                  "type": "boolean"
+                                },
                                 "experimental": {
                                   "type": "boolean"
                                 },
@@ -5032,7 +5172,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.provider.oauth.callback({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.provider.oauth.callback({\n  ...\n})"
           }
         ]
       }
@@ -5044,6 +5184,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5100,7 +5247,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.telemetry.capture({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.telemetry.capture({\n  ...\n})"
           }
         ]
       }
@@ -5112,6 +5259,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5177,7 +5331,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.commitMessage.generate({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.commitMessage.generate({\n  ...\n})"
           }
         ]
       }
@@ -5189,6 +5343,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5244,7 +5405,139 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.enhancePrompt.enhance({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.enhancePrompt.enhance({\n  ...\n})"
+          }
+        ]
+      }
+    },
+    "/kilocode/skill/remove": {
+      "post": {
+        "operationId": "kilocode.removeSkill",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Remove a skill",
+        "description": "Remove a skill by deleting its directory from disk and clearing it from cache.",
+        "responses": {
+          "200": {
+            "description": "Skill removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string"
+                  }
+                },
+                "required": ["location"]
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilocode.removeSkill({\n  ...\n})"
+          }
+        ]
+      }
+    },
+    "/kilocode/agent/remove": {
+      "post": {
+        "operationId": "kilocode.removeAgent",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Remove a custom agent",
+        "description": "Remove a custom (non-native) agent by deleting its markdown file from disk and refreshing state.",
+        "responses": {
+          "200": {
+            "description": "Agent removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilocode.removeAgent({\n  ...\n})"
           }
         ]
       }
@@ -5256,6 +5549,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5347,7 +5647,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.profile({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.profile({\n  ...\n})"
           }
         ]
       }
@@ -5359,6 +5659,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5413,7 +5720,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.organization.set({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.organization.set({\n  ...\n})"
           }
         ]
       }
@@ -5425,6 +5732,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5516,7 +5830,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.fim({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.fim({\n  ...\n})"
           }
         ]
       }
@@ -5528,6 +5842,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5593,7 +5914,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.notifications({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.notifications({\n  ...\n})"
           }
         ]
       }
@@ -5605,6 +5926,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5643,7 +5971,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.cloud.session.get({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.cloud.session.get({\n  ...\n})"
           }
         ]
       }
@@ -5655,6 +5983,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5710,7 +6045,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.cloud.session.import({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.cloud.session.import({\n  ...\n})"
           }
         ]
       }
@@ -5722,6 +6057,13 @@
           {
             "in": "query",
             "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workspace",
             "schema": {
               "type": "string"
             }
@@ -5819,7 +6161,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createKiloClient } from \"@kilocode/sdk\"\n\nconst client = createKiloClient()\nawait client.kilo.cloudSessions({\n  ...\n})"
+            "source": "import { createKiloClient } from \"@kilocode/sdk\n\nconst client = createKiloClient()\nawait client.kilo.cloudSessions({\n  ...\n})"
           }
         ]
       }
@@ -7431,7 +7773,7 @@
           }
         ],
         "summary": "Dispose instance",
-        "description": "Clean up and dispose the current OpenCode instance, releasing all resources.",
+        "description": "Clean up and dispose the current Kilo instance, releasing all resources.",
         "responses": {
           "200": {
             "description": "Instance disposed",
@@ -7472,7 +7814,7 @@
           }
         ],
         "summary": "Get paths",
-        "description": "Retrieve the current working directory and related path information for the OpenCode instance.",
+        "description": "Retrieve the current working directory and related path information for the Kilo instance.",
         "responses": {
           "200": {
             "description": "Path",
@@ -7554,7 +7896,7 @@
           }
         ],
         "summary": "List commands",
-        "description": "Get a list of all available commands in the OpenCode system.",
+        "description": "Get a list of all available commands in the Kilo system.",
         "responses": {
           "200": {
             "description": "List of commands",
@@ -7682,7 +8024,7 @@
           }
         ],
         "summary": "List agents",
-        "description": "Get a list of all available AI agents in the OpenCode system.",
+        "description": "Get a list of all available AI agents in the Kilo system.",
         "responses": {
           "200": {
             "description": "List of agents",
@@ -7726,7 +8068,7 @@
           }
         ],
         "summary": "List skills",
-        "description": "Get a list of all available skills in the OpenCode system.",
+        "description": "Get a list of all available skills in the Kilo system.",
         "responses": {
           "200": {
             "description": "List of skills",
@@ -8276,9 +8618,6 @@
                 "type": "string"
               },
               "shell": {
-                "type": "string"
-              },
-              "timezone": {
                 "type": "string"
               }
             }
@@ -10379,47 +10718,6 @@
         },
         "required": ["type", "properties"]
       },
-      "Event.worktree.ready": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "worktree.ready"
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "branch": {
-                "type": "string"
-              }
-            },
-            "required": ["name", "branch"]
-          }
-        },
-        "required": ["type", "properties"]
-      },
-      "Event.worktree.failed": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "worktree.failed"
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "string"
-              }
-            },
-            "required": ["message"]
-          }
-        },
-        "required": ["type", "properties"]
-      },
       "Event.workspace.ready": {
         "type": "object",
         "properties": {
@@ -10571,6 +10869,47 @@
         },
         "required": ["type", "properties"]
       },
+      "Event.worktree.ready": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "worktree.ready"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "branch": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "branch"]
+          }
+        },
+        "required": ["type", "properties"]
+      },
+      "Event.worktree.failed": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "worktree.failed"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": ["message"]
+          }
+        },
+        "required": ["type", "properties"]
+      },
       "Event": {
         "anyOf": [
           {
@@ -10691,12 +11030,6 @@
             "$ref": "#/components/schemas/Event.vcs.branch.updated"
           },
           {
-            "$ref": "#/components/schemas/Event.worktree.ready"
-          },
-          {
-            "$ref": "#/components/schemas/Event.worktree.failed"
-          },
-          {
             "$ref": "#/components/schemas/Event.workspace.ready"
           },
           {
@@ -10713,6 +11046,12 @@
           },
           {
             "$ref": "#/components/schemas/Event.pty.deleted"
+          },
+          {
+            "$ref": "#/components/schemas/Event.worktree.ready"
+          },
+          {
+            "$ref": "#/components/schemas/Event.worktree.failed"
           }
         ]
       },
@@ -10734,7 +11073,7 @@
         "enum": ["DEBUG", "INFO", "WARN", "ERROR"]
       },
       "ServerConfig": {
-        "description": "Server configuration for opencode serve and web commands",
+        "description": "Server configuration for kilo serve and web commands",
         "type": "object",
         "properties": {
           "port": {
@@ -10752,7 +11091,7 @@
             "type": "boolean"
           },
           "mdnsDomain": {
-            "description": "Custom domain name for mDNS service (default: opencode.local)",
+            "description": "Custom domain name for mDNS service (default: kilo.local)",
             "type": "string"
           },
           "cors": {
@@ -11099,6 +11438,9 @@
                   "type": "string",
                   "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
                 },
+                "isFree": {
+                  "type": "boolean"
+                },
                 "experimental": {
                   "type": "boolean"
                 },
@@ -11328,7 +11670,7 @@
             "$ref": "#/components/schemas/ServerConfig"
           },
           "command": {
-            "description": "Command configuration, see https://opencode.ai/docs/commands",
+            "description": "Command configuration, see https://kilo.ai/docs/commands",
             "type": "object",
             "propertyNames": {
               "type": "string"
@@ -11476,7 +11818,7 @@
             }
           },
           "agent": {
-            "description": "Agent configuration, see https://opencode.ai/docs/agents",
+            "description": "Agent configuration, see https://kilo.ai/docs/agents",
             "type": "object",
             "properties": {
               "plan": {
@@ -11721,6 +12063,10 @@
               },
               "batch_tool": {
                 "description": "Enable the batch tool",
+                "type": "boolean"
+              },
+              "codebase_search": {
+                "description": "Enable AI-powered codebase search",
                 "type": "boolean"
               },
               "openTelemetry": {
@@ -12069,6 +12415,9 @@
           "prompt": {
             "type": "string",
             "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
+          },
+          "isFree": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -12151,6 +12500,60 @@
           "$ref": "#/components/schemas/ToolListItem"
         }
       },
+      "Workspace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^wrk.*"
+          },
+          "type": {
+            "type": "string"
+          },
+          "branch": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "directory": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extra": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "projectID": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "type", "branch", "name", "directory", "extra", "projectID"]
+      },
       "Worktree": {
         "type": "object",
         "properties": {
@@ -12177,46 +12580,6 @@
             "type": "string"
           }
         }
-      },
-      "Workspace": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^wrk.*"
-          },
-          "branch": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "projectID": {
-            "type": "string"
-          },
-          "config": {
-            "anyOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "directory": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string",
-                    "const": "worktree"
-                  }
-                },
-                "required": ["directory", "type"]
-              }
-            ]
-          }
-        },
-        "required": ["id", "branch", "projectID", "config"]
       },
       "WorktreeRemoveInput": {
         "type": "object",

@@ -4,12 +4,10 @@ export const dict = {
   "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Autocomplete",
   "kilocode:autocomplete.statusBar.snoozed": "wstrzymane",
   "kilocode:autocomplete.statusBar.warning": "$(warning) Autocomplete",
-  "kilocode:autocomplete.statusBar.tooltip.basic": "湛卢自动补全",
-  "kilocode:autocomplete.statusBar.tooltip.disabled": "湛卢自动补全 (wyłączone)",
-  "kilocode:autocomplete.statusBar.tooltip.noCredits":
-    "**Brak środków na koncie**\n\nTwoje konto 湛卢 nie ma środków. Aby korzystać z autouzupełniania, dodaj środki do swojego konta.\n\n[Otwórz Ustawienia](command:zhanlu.settingsButtonClicked)",
+  "kilocode:autocomplete.statusBar.tooltip.basic": "Kilo Code Autocomplete",
+  "kilocode:autocomplete.statusBar.tooltip.disabled": "Kilo Code Autocomplete (wyłączone)",
   "kilocode:autocomplete.statusBar.tooltip.noUsableProvider":
-    "**Nie skonfigurowano modelu autouzupełniania**\n\nAby włączyć autouzupełnianie, dodaj profil z jednym z tych obsługiwanych dostawców: {{providers}}.\n\n[Otwórz Ustawienia](command:zhanlu.settingsButtonClicked)",
+    "**Nie skonfigurowano modelu autouzupełniania**\n\nAby włączyć autouzupełnianie, dodaj profil z jednym z tych obsługiwanych dostawców: {{providers}}.\n\n[Otwórz Ustawienia]({{command}})",
   "kilocode:autocomplete.statusBar.tooltip.sessionTotal": "Całkowity koszt sesji:",
   "kilocode:autocomplete.statusBar.tooltip.provider": "Dostawca:",
   "kilocode:autocomplete.statusBar.tooltip.model": "Model:",

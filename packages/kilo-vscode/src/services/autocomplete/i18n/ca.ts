@@ -4,12 +4,10 @@ export const dict = {
   "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Autocomplete",
   "kilocode:autocomplete.statusBar.snoozed": "pausat",
   "kilocode:autocomplete.statusBar.warning": "$(warning) Autocomplete",
-  "kilocode:autocomplete.statusBar.tooltip.basic": "湛卢自动补全",
-  "kilocode:autocomplete.statusBar.tooltip.disabled": "湛卢自动补全 (desactivat)",
-  "kilocode:autocomplete.statusBar.tooltip.noCredits":
-    "**No tens crèdits al teu compte**\n\nEl teu compte 湛卢 no té crèdits. Per utilitzar l'autocompletat, si us plau afegeix crèdits al teu compte.\n\n[Obrir Configuració](command:zhanlu.settingsButtonClicked)",
+  "kilocode:autocomplete.statusBar.tooltip.basic": "Kilo Code Autocomplete",
+  "kilocode:autocomplete.statusBar.tooltip.disabled": "Kilo Code Autocomplete (desactivat)",
   "kilocode:autocomplete.statusBar.tooltip.noUsableProvider":
-    "**No s'ha configurat cap model d'autocompletat**\n\nPer habilitar l'autocompletat, afegeix un perfil amb un d'aquests proveïdors compatibles: {{providers}}.\n\n[Obrir Configuració](command:zhanlu.settingsButtonClicked)",
+    "**No s'ha configurat cap model d'autocompletat**\n\nPer habilitar l'autocompletat, afegeix un perfil amb un d'aquests proveïdors compatibles: {{providers}}.\n\n[Obrir Configuració]({{command}})",
   "kilocode:autocomplete.statusBar.tooltip.sessionTotal": "Cost total de la sessió:",
   "kilocode:autocomplete.statusBar.tooltip.provider": "Proveïdor:",
   "kilocode:autocomplete.statusBar.tooltip.model": "Model:",

@@ -50,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
   )
 
   // Create Agent Manager provider for editor panel
-  const agentManagerProvider = new AgentManagerProvider(context.extensionUri, connectionService)
+  const agentManagerProvider = new AgentManagerProvider(context.extensionUri, connectionService, context)
   context.subscriptions.push(agentManagerProvider)
 
   // zhanlu_change start - initialize extension-side Agent mode controller
@@ -103,7 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
       agentManagerProvider.openPanel()
     }),
     vscode.commands.registerCommand("zhanlu.marketplaceButtonClicked", () => {
-      provider.postMessage({ type: "action", action: "marketplaceButtonClicked" })
+      settingsEditorProvider.openPanel("marketplace")
     }),
     vscode.commands.registerCommand("zhanlu.historyButtonClicked", () => {
       provider.postMessage({ type: "action", action: "historyButtonClicked" })
@@ -114,8 +114,8 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("zhanlu.profileButtonClicked", () => {
       settingsEditorProvider.openPanel("profile")
     }),
-    vscode.commands.registerCommand("zhanlu.settingsButtonClicked", () => {
-      settingsEditorProvider.openPanel("settings")
+    vscode.commands.registerCommand("zhanlu.settingsButtonClicked", (tab?: string) => {
+      settingsEditorProvider.openPanel("settings", tab)
     }),
     // legacy-migration start
     vscode.commands.registerCommand("zhanlu.openMigrationWizard", () => {
@@ -202,7 +202,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register code actions (editor context menus, terminal context menus, keyboard shortcuts)
   registerCodeActions(context, provider, agentManagerProvider)
-  registerTerminalActions(context, provider)
+  registerTerminalActions(context, provider, agentManagerProvider)
 
   // Register CodeActionProvider (lightbulb quick fixes)
   context.subscriptions.push(

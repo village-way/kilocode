@@ -85,6 +85,13 @@ interface SessionAddedMessage {
   worktreeId: string
 }
 
+interface SessionForkedMessage {
+  type: "agentManager.sessionForked"
+  sessionId: string
+  forkedFromId: string
+  worktreeId?: string
+}
+
 interface MultiVersionProgressMessage {
   type: "agentManager.multiVersionProgress"
   status: "creating" | "done"
@@ -181,6 +188,7 @@ export type AgentManagerOutMessage =
   | StateMessage
   | ErrorOutMessage
   | SessionAddedMessage
+  | SessionForkedMessage
   | MultiVersionProgressMessage
   | SetSessionModelMessage
   | SendInitialMessage
@@ -371,6 +379,12 @@ interface GenericOpenFileIn {
   column?: number
 }
 
+interface PreviewImageIn {
+  type: "previewImage"
+  dataUrl: string
+  filename: string
+}
+
 interface LoadMessagesIn {
   type: "loadMessages"
   sessionID: string
@@ -378,6 +392,12 @@ interface LoadMessagesIn {
 
 interface ClearSessionIn {
   type: "clearSession"
+}
+
+interface ForkSessionIn {
+  type: "agentManager.forkSession"
+  sessionId: string
+  worktreeId?: string
 }
 
 interface AbortIn {
@@ -393,6 +413,7 @@ export type AgentManagerInMessage =
   | PromoteSessionIn
   | AddSessionToWorktreeIn
   | CloseSessionIn
+  | ForkSessionIn
   | ConfigureSetupScriptIn
   | ShowTerminalIn
   | ShowLocalTerminalIn
@@ -419,6 +440,7 @@ export type AgentManagerInMessage =
   | StopDiffWatchIn
   | OpenFileIn
   | GenericOpenFileIn
+  | PreviewImageIn
   | LoadMessagesIn
   | ClearSessionIn
   | AbortIn
