@@ -43,7 +43,10 @@
     "mcp"
   ],
   "activationEvents": [
-    "onWebviewPanel:zhanlu.AgentManagerPanel"
+    "onWebviewPanel:zhanlu.AgentManagerPanel",
+    "onCommand:zhanlu.agentMode",
+    "onCommand:zhanlu.editorMode",
+    "onCommand:zhanlu.toggleMode"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -76,6 +79,21 @@
         "command": "zhanlu.agentManagerOpen",
         "title": "Agent Manager",
         "icon": "$(circuit-board)"
+      },
+      {
+        "command": "zhanlu.agentMode",
+        "title": "Agent Mode",
+        "category": "Zhanlu"
+      },
+      {
+        "command": "zhanlu.editorMode",
+        "title": "Editor Mode",
+        "category": "Zhanlu"
+      },
+      {
+        "command": "zhanlu.toggleMode",
+        "title": "Toggle Agent Mode",
+        "category": "Zhanlu"
       },
       {
         "command": "zhanlu.marketplaceButtonClicked",

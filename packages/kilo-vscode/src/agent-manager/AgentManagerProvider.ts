@@ -1879,6 +1879,12 @@ export class AgentManagerProvider implements vscode.Disposable {
     this.panel.reveal(vscode.ViewColumn.One, false)
   }
 
+  // zhanlu_change start - Agent mode exits close the Agent Manager panel through the extension
+  public closePanel(): void {
+    this.panel?.dispose()
+  }
+  // zhanlu_change end
+
   public isActive(): boolean {
     return this.panel?.active === true
   }

@@ -1,6 +1,9 @@
 import * as vscode from "vscode"
 import { KiloProvider } from "./KiloProvider"
 import { AgentManagerProvider } from "./agent-manager/AgentManagerProvider"
+// zhanlu_change start - extension command bridge for Agent mode switching
+import { AgentModeController } from "./agent/AgentModeController"
+// zhanlu_change end
 import { DiffViewerProvider } from "./DiffViewerProvider"
 import { SettingsEditorProvider } from "./SettingsEditorProvider"
 import { SubAgentViewerProvider } from "./SubAgentViewerProvider"
@@ -50,6 +53,11 @@ export function activate(context: vscode.ExtensionContext) {
   const agentManagerProvider = new AgentManagerProvider(context.extensionUri, connectionService)
   context.subscriptions.push(agentManagerProvider)
 
+  // zhanlu_change start - initialize extension-side Agent mode controller
+  const agentModeController = new AgentModeController(agentManagerProvider)
+  void agentModeController.initialize()
+  // zhanlu_change end
+
   // Register serializer so Agent Manager restores when VS Code restarts
   context.subscriptions.push(
     vscode.window.registerWebviewPanelSerializer(AgentManagerProvider.viewType, {
@@ -77,9 +85,20 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register toolbar button command handlers
   context.subscriptions.push(
+    // zhanlu_change start - titlebar mode buttons are routed through extension commands first
     vscode.commands.registerCommand("zhanlu.plusButtonClicked", () => {
       provider.postMessage({ type: "action", action: "plusButtonClicked" })
     }),
+    vscode.commands.registerCommand("zhanlu.agentMode", async () => {
+      await agentModeController.enterAgentMode()
+    }),
+    vscode.commands.registerCommand("zhanlu.editorMode", async () => {
+      await agentModeController.exitAgentMode()
+    }),
+    vscode.commands.registerCommand("zhanlu.toggleMode", async () => {
+      await agentModeController.toggleMode()
+    }),
+    // zhanlu_change end
     vscode.commands.registerCommand("zhanlu.agentManagerOpen", () => {
       agentManagerProvider.openPanel()
     }),
