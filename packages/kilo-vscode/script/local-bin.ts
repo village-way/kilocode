@@ -6,13 +6,13 @@ import { chmodSync, statSync, rmSync, readdirSync, existsSync } from "node:fs"
 const forceRebuild = process.argv.includes("--force")
 
 /**
- * Ensures the VS Code extension has a CLI binary at `packages/kilo-vscode/bin/kilo`.
+ * Ensures the VS Code extension has a CLI binary at `packages/kilo-vscode/bin/zhanlu` (or `zhanlu.exe` on Windows).
  *
  * Strategy:
- * 1) If `bin/kilo` already exists -> ok.
+ * 1) If `bin/zhanlu` (or `zhanlu.exe`) already exists -> ok.
  * 2) Else try to locate a prebuilt binary produced by `packages/opencode` build.
  * 3) Else try to build it via `bun run build --single` in `packages/opencode`.
- * 4) Copy the resulting binary into `packages/kilo-vscode/bin/kilo` and chmod +x.
+ * 4) Copy the resulting binary into `packages/kilo-vscode/bin/` and chmod +x.
  *
  * This script is intended to be run from `packages/kilo-vscode` as part of build/package.
  */
@@ -106,7 +106,7 @@ async function ensureBuiltBinary(): Promise<string> {
   const built = await findKiloBinaryInOpencodeDist()
   if (!built) {
     throw new Error(
-      `CLI build completed but no binary was found in ${join(opencodeDir, "dist")} (expected dist/**/bin/kilo).`,
+      `CLI build completed but no binary was found in ${join(opencodeDir, "dist")} (expected dist/**/bin/zhanlu or zhanlu.exe).`,
     )
   }
   return built
